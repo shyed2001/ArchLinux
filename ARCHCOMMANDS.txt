@@ -1,0 +1,1620 @@
+SOME COMMANDS I RAN:
+Using fdisk:
+fdisk -l   (lists out the partitions)
+fdisk /dev/sda  
+In fdisk, "m" for help
+In fdisk, "o" for DOS partition or "g" for GPT
+In fdisk, "n" for add new partition
+In fdisk, "p" for primary partition (if using MBR instead of GPT)
+In fdisk, "t" to change partition type
+In fdisk, "w" (write table to disk)
+
+Make filesystem:
+mkfs.fat -F32 /dev/sda1
+mkswap /dev/sda2
+swapon /dev/sda2
+mkfs.ext4 /dev/sda3
+
+Base Install:
+mount /dev/sda3 /mnt (mounts it to mnt on live image)
+pacstrap /mnt base linux linux-firmware
+genfstab -U /mnt TWO GREATER THAN SIGNS /mnt/etc/fstab (YouTube doesn't allow angle brackets)
+
+Chroot:
+arch-chroot /mnt (change into root directory of our new installation)
+ln -sf /usr/share/zoneinfo/REGION/CITY /etc/localtime
+hwclock --systohc (sets the hardware clock)
+pacman -S nano
+nano /etc/locale.gen
+locale-gen
+nano /etc/hostname
+nano /etc/hosts
+
+Users and passwords:
+passwd (set root pass)
+useradd -m username (make another user)
+passwd username (set that user's password)
+usermod -aG wheel,audio,video,optical,storage username
+
+Sudo:
+pacman -S sudo
+EDITOR=nano visudo
+
+GRUB:
+pacman -S grub
+pacman -S  efibootmgr dosfstools os-prober mtools (if doing UEFI)
+mkdir /boot/EFI (if doing UEFI)
+mount /dev/sda1 /boot/EFI  #Mount FAT32 EFI partition (if doing UEFI)
+grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck (if doing UEFI)
+grub-mkconfig -o /boot/grub/grub.cfg
+
+Networking:
+pacman -S networkmanager
+systemctl enable NetworkManager
+
+Reboot:
+exit the chroot by typing "exit"
+umount /mnt (unmounts /mnt)
+reboot (or shutdown now if doing this in VirtualbBox)
+Remember to detach the ISO in VirtualBox before reboot.
+
+
+
+FPL is part of the Destination Linux Network
+
+DLN Community:
+
+News
+Articles
+Tutorials
+Videos
+About
+Contact
+Search
+Search...
+How To Install Arch Linux: A Step by Step Installation Guide
+Deep Grewal
+Deep Grewal
+March 12, 2021
+No Comments
+
+Share:
+
+Share on twitter 
+Share on facebook 
+Share on reddit 
+Share on linkedin 
+Share on email
+The installation of Arch has been and continues to be a rite-of-passage within the Linux community. Although there are many guides that discuss the steps needed to install Arch Linux, I couldn’t resist writing my very own guide. This guide promises to be different by being a narrative-style approach to the topic. The goals of this guide are to be educational, informative, and to make & keep it simple (in the spirit of the Arch philosophy). The guide assumes that you have some proficiency with the command line and have a basic understanding of Linux. I hope that this guide can help you succeed with this rite and put you in control of a system that you have built from the ground-up.
+
+As an Arch user, the Arch Wiki will be an extremely valuable resource to you. This resource is so well-composed and maintained that even non-Arch users glean knowledge, wisdom, and solutions from it daily.
+
+And now, may the adventure begin…
+
+Download the Arch ISO
+The first thing that we need to do is to obtain an image of Arch Linux. To do so, let’s visit the the Arch Linux download page to download the ISO image file.
+
+Boot the System to the Arch ISO
+Depending upon the type of system that Arch will be installed on, there are different methods of booting the Arch ISO.
+
+Physical Machine
+For physical machines, a bootable medium can be created from the Arch ISO file.
+
+Prepare Live Bootable USB
+Although an optical disk could have been used to create a bootable physical medium, USB was chosen due to its relevance. There are many ways to prepare a live USB, one of them is via the dd command. It is worth noting that you should be very cautious when using the dd command since it can overwrite running disks. There are other options as well such as SUSE Image Writer, Fedora Image Writer, Mint Stick and others. The scope of this guide won’t be able to provide a guide for each writer tool so we’ll stick with dd for this guide. Remember, be careful with dd since it is nicknamed “disk destroyer” for a reason.
+
+# dd if=/location/of/iso/file of=/device/entry/of/usb/drive
+Boot to USB
+Insert the USB drive into the physical machine and boot into the USB drive. BIOS settings/boot order may need to be adjusted to ensure that the physical machine boots from the USB drive.
+
+Confirm You are In
+Once you have properly booted into the Arch ISO, a prompt similar to the one below will be displayed.
+
+root@archiso ~ #
+Virtual Machine
+Virtual machines do not require a physical medium to be created. The Arch ISO file can be mounted as a virtualized optical disk within the virtualized optical drive.
+
+Confirm You are In
+Once you have properly booted into the Arch ISO, a prompt similar to the one below will be displayed.
+
+root@archiso ~ #
+Verify Connectivity to the Internet
+During the installation, I prefer to have a wired connection to the Internet. This guide has been written based on a machine that is connected to the Internet using a wired connection.
+
+To check Internet connectivity, simply ping a website as shown in the example below.
+
+root@archiso ~ # ping -c 4 archlinux.org
+PING archlinux.org (95.217.163.246) 56(84) bytes of data.
+64 bytes from archlinux.org (95.217.163.246): icmp_seq=1 ttl=47 time=206 ms
+64 bytes from archlinux.org (95.217.163.246): icmp_seq=2 ttl=47 time=181 ms
+64 bytes from archlinux.org (95.217.163.246): icmp_seq=3 ttl=47 time=181 ms
+64 bytes from archlinux.org (95.217.163.246): icmp_seq=4 ttl=47 time=181 ms
+
+--- archlinux.org ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3003ms
+rtt min/avg/max/mdev = 180.629/187.159/205.907/10.828 ms
+Update the System Clock
+Now that we have confirmed connectivity to the Internet, we can leverage NTP. Use timedatectl command to ensure the system clock is accurate by enabling NTP.
+
+root@archiso ~ # timedatectl set-ntp true
+Starting Network Time Synchronization...
+[  OK  ] Started Network Time Synchronization.
+[  OK  ] Reached target System Time Set.
+[  OK  ] Reached target System Time Synchronized.
+Disk Partitioning
+In order for us to have a working distribution, we have to create some partitions on the target hard disk so that we can properly install and run Arch Linux. There are numerous tools and commands that can be used for disk partitioning. This guide uses fdisk to create the partitions.
+
+The recommended partition schemes vary depending on whether or not the system has UEFI mode enabled.
+
+So, let’s verify if UEFI mode is enabled by checking for the existence of this directory:
+
+root@archiso ~ # ls /sys/firmware/efi/efivars
+ls: cannot access '/sys/firmware/efi/efivars': No such file or directory
+Based on the output of the command above, we can determine that the system being used in this guide does not have UEFI.
+
+Now, we can list all existing disk and disk partitions. For the purposes of this guide and for a simpler installation, a virtual machine has been created with a blank 20GB hard disk identified by /dev/sda.
+
+root@archiso ~ # fdisk -l
+Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop0: 566.52 MiB, 594034688 bytes, 1160224 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Let’s begin the partitioning process on the /dev/sda hard disk.
+
+root@archiso ~ # fdisk /dev/sda
+
+Welcome to the fdisk (util-linux 2.36.1).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table.
+Created a new DOS disklabel with disk identifier 0xa1936afe.
+
+Command (m for help):
+If you would like to see all fdisk commands, this is an ideal opporunity to press the m key and Enter to display a list of all commands. You could do that for your information (FYI). However, this guide will walk you through the commands that are needed to partition the disk.
+
+Before we create any partitions, let’s review the recommended partition schemes.
+
+Recommended Partition Schemes
+The schemes below are mere recommendations and can be altered to your liking. Notably, there are many viewpoints on the size of a swap partition, so take these recommendations with a grain of salt and do what suits you best. After all, that’s the beauty of creating your very own system from the ground-up.
+
+NON-UEFI
+Mount Point	Partition	Partition Type	Partition Size	File System
+/mnt	/dev/sda1	Linux	Remainder of the device	ext4
+[SWAP]	/dev/sda2	Linux swap	More than 512 MiB	ext4
+UEFI
+Mount Point	Partition	Partition Type	Partition Size	File System
+/mnt/boot or mnt/efi	/dev/sda1	EFI System Partition	260MB – 512MB	fat32
+/mnt	/dev/sda2	Linux x86-64 root (/)	Remainder of the device	ext4
+[SWAP]	/dev/sda3	Linux swap	More than 512MiB	ext4
+Create the Partitions
+Since we have a non-UEFI system, it makes sense to follow the NON-UEFI partition scheme above. This means that we will create 2 partitions: a swap partition (Linux swap) and a partition where root will be mounted (Linux).
+
+We have a hard drive that is approximately 20GB in size, so we can easily spare approximately half of a gigabyte (512MB) for the Linux swap partition (/dev/sda2). Leaving us with approximately 19.5GB for the Linux partition (/dev/sda1).
+
+Linux Partition
+First, let’s create the Linux partition (/dev/sda1/).
+
+Command (m for help): n
+
+Partition type
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended (container for logical partitions)
+Select (default p): p   
+
+Partition number (1-4, default 1): 1
+
+First sector (2048-41943039, default 2048): 2048
+
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-41943049, default 41943039): +19.5G
+
+Created a new partition of type 'Linux' and of size 19.5 GiB.
+Swap Partition
+Next, let’s go ahead and create the Linux swap partition (/dev/sda2/).
+
+Command (m for help): n
+
+Partition type
+   p   primary (1 primary, 0 extended, 3 free)
+   e   extended (container for logical partitions)
+Select (default p): p   
+
+Partition number (2-4, default 2): 2
+
+First sector (40896512-41943039, default 40896512): 40896512
+
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (40896512-41943039, default 41943039): 41943039
+
+Created a new partition 2 of type 'Linux' and of size 511 MiB.
+With the Linux swap partition, we need to change the partition type so that it is a true swap partition.
+
+If you would like to see all partition types, this is an ideal opporunity to press the l key and Enter to display a list of all partition types. You could do that for your information (FYI). However, this guide will walk you through the commands that are needed to partition the disk.
+
+We now need to change the partition type of our intended Linux swap partition (/dev/sda2).
+
+Command (m for help): t
+
+Partition number (1,2, default 2): 2
+
+Hex code or alias (type L to list all): 82
+
+Changed type of partition 'Linux' to 'Linux swap / Solaris'.
+Verify Proposed Partition Table
+Before we save our changes and commit them to the disk, let’s take a moment to verify that everything was done correctly.
+
+Command (m for help): p
+Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xc12ff6e9
+
+Device     Boot    Start      End  Sectors  Size Id Type
+/dev/sda1           2048 40896511 40894464 19.5G 83 Linux
+/dev/sda2       40896512 41943039  1046528  511M 82 Linux swap / Solaris
+Write Partition Table to Disk
+Finally, let’s write the newly created partition table to the disk and exit the fdisk utility.
+
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+root@archiso ~ #
+Create File System
+The creation of the partitions in the previous steps simply drew boundaries on the storage space offered by the hard disk and specified the type of space betweeen each boundry line. In order for these partitions to be of any use, they should be initialized with a file system and have the swap partition enabled.
+
+Again depending on the type of system (UEFI, non-UEFI), the process will vary.
+
+NON-UEFI
+For our non-UEFI system, let’s create an ext4 file system on the root partition (you may choose any other viable file system).
+
+root@archiso ~ # mkfs.ext4 /dev/sda1
+mke2fs 1.45.6 (20-Mar-2020)
+Creating filesystem with 5111808 4k blocks and 1277952 inodes
+Filesystem UUID: ca970c3e-5a47-468c-8ff7-6ba9dda277af
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 4096000
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (32768 blocks): done
+Writing superblocks and filesystem accounting information: done
+Also, let’s prepare the swap partition.
+
+root@archiso ~ # mkswap /dev/sda2
+Setting up swapspace version 1, size = 511 MiB (535818240 bytes)
+no label, UUID=12e273d1-4dc4-4151-9ffe-6a09ae78be38
+
+root@archiso ~ # swapon /dev/sda2
+UEFI
+For the EFI partition type, create a FAT32 file system.
+
+# mkfs.fat -F32 /dev/sda1
+For the root partition, create an ext4 file system (or any other viable file system of your choice).
+
+# mkfs.ext4 /dev/sda2
+Prepare the swap partition:
+
+# mkswap /dev/sda3
+# swapon /dev/sda3
+Optimize Mirrors
+Much like any other distro, Arch Linux relies on mirrors to obtain updates. There are a plethora of mirrors that are hosted on hundreds of servers spanning the entire globe. Usually, the mirrors which are geographically nearer in distance should provide for the fastest connection speeds.
+
+Arch Linux comes with a file known as the “mirrorlist” which contains all known mirrors. However, this file is not optimized since it contains every single mirror. We could manually go through this file and edit it, but that would take quite some time. Luckily, there is a tool (Python script) called reflector that has been created that will automatically optimize the file for us. We just need to provide some input.
+
+Sync the pacman Repository
+Before we go about downloading any applications/tools, we should update the repository and ensure that we have the latest and greatest available to us.
+
+root@archiso ~ # pacman -Syy
+:: Synchronizing package databases...
+ core                            132.8 KiB  5.64 MiB/s 00:00 [#################################] 100%
+ extra                          1633.0 KiB  10.4 MiB/s 00:00 [#################################] 100%
+ community                         5.3 MiB  8.91 MiB/s 00:00 [#################################] 100%
+Install reflector
+With a fully-updated repository, we are in good-standing to install the reflector tool so that we can optimize the /etc/pacman.d/mirrorlist file for local mirrors.
+
+root@archiso ~ # pacman -S reflector
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (1) reflector-2021-1
+
+Total Download Size:   0.03 MiB
+Total Installed Size:  0.10 MiB
+Net Upgrade Size:      0.01 MiB
+
+:: Proceed with installation? [Y/n] Y
+:: Retrieving packages...
+ reflector-2021-1-any             25.9 KiB 0.00   B/s 00:00 [#################################] 100%
+(1/1) checking keys in keyring                              [#################################] 100%
+(1/1) checking package integrity                            [#################################] 100%
+(1/1) loading package files                                 [#################################] 100%
+(1/1) checking for file conflicts                           [#################################] 100%
+(1/1) checking available disk space                         [#################################] 100%
+:: Processing package changes...
+(1/1) upgrading reflector                                   [#################################] 100%
+:: Running post-transaction hooks...
+(1/2) Reloading system manager configuration...
+(2/2) Arming ConditionNeedsUpdate... 
+Back up Existing Mirrorlist File
+It doesn’t hurt to make a backup of a file that is going to be changed. Let’s make a backup of the /etc/pacman.d/mirrorlist file.
+
+root@archiso ~ # cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+Run reflector Against the Mirrorlist File
+Execute the reflector command to optimize the /etc/pacman.d/mirrorlist file. The end result will be a leaner file which contains the most optimal entries. Since I am in the United States, I have used “US” as the country code within the command.
+
+root@archiso ~ # reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
+Install Arch Linux
+Our system has now been prepared and optimized to take on the install of Arch Linux. This phase involves mounting the Linux partition and installing desired packages using the pacstrap command on to the mounted Linux partition.
+
+Mount the Linux Partition
+We must mount the root directory before we can perform any installation.
+
+NON-UEFI
+root@archiso ~ # mount /dev/sda1 /mnt
+UEFI
+root@archiso ~ # mount /dev/sda2 /mnt
+Perform the Installation
+Use the pacstrap command to install Arch Linux, required packages, and any additional packages (in this case, the nano text editor) to the mounted Linux partition. Additional packages can always be installed later; the installation of nano as an additional package was included to demonstrate the ability of the pacstrap command (and to promote nano as my favorite text editor which will come in handy later in this guide).
+
+root@archiso ~ # pacstrap /mnt base linux linux-firmware nano
+After issuing the command above, the screen will be very busy with the installation of multiple packages which comprise the Arch Linux distribution. Once complete, we can now say that we have installed Arch Linux! But, there’s still more to do: configuration, bootloader installation, and selecting a desktop environment.
+
+Configure the Installed Arch System
+During the configuration phase, we will start things off by setting the root partition to mount automatically. Then, we will set the timezone so that it reflects the current/local timezone. Next, we will set the locale so that dates, times, numbers, etc. are formatted correctly based on the geographical locale of the machine. Also, we can take this opportunity to make some minor network configurations so that this machine has a proper and accurate identity on the network. Finally, we can enhance the security of the machine by setting a password for the root user.
+
+Automating the Mounts
+Let’s create the /etc/fstab so that the root partition is mounted automatically when the system is booted. The /etc/fstab file can be edited manually, but our goal is to simplify the installation of Arch Linux. Similar to what we did with the reflector tool to automate the optimal mirror selection process, we will introduce and use yet another tool to create the /etc/fstab file.
+
+We can automatically generate the fstab file using the genfstab command.
+
+root@archiso ~ # genfstab -U /mnt >> /mnt/etc/fstab
+Change Root
+Recall that we initially booted into this machine using an image file. We are still in the root directory of the image file and our session is in RAM. Now that we have installed Arch Linux, we need to switch to the physically installed root partition using the arch-chroot command.
+
+Change root to the root directory at /mnt.
+
+root@archiso ~ # arch-chroot /mnt
+Setting the Timezone
+At the beginning of this guide, we were able to set NTP to true. This ensured that we had the correct time, but did not ensure that we had the correct timezone. In this step, we will apply the correct timezone (UTC offset) so that the time represented in our installation is relevant to the geographical location.
+
+Use the timedatectl command to find your timezone. You can use the arrow keys and the PgUp and PgDn keys to navigate through the list. Once complete press q to exit the list.
+
+[root@archiso /]# timedatectl list-timezones
+Create a symbollic link to set the timezone (replace “America/Los_Angeles” with your timezone).
+
+[root@archiso /]# ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+Run hwclock to generate /etc/adjtime.
+
+[root@archiso /]# hwclock --systohc
+Setting Up Locale
+The term “locale” refers to language, number, date and currency formats The file /etc/locale.gen contains locale settings and system languages and is commented by default. We must open this file using a text editor and uncomment the line which contains the desired locale. This is why nano was installed previously using the pacstrap command.
+
+Open the /etc/locale.gen file and remove the “#” from the start of the line which contains your locale. Then, save the file.
+
+[root@archiso /]# nano /etc/locale.gen
+Since I am in the United States, the following entry has been uncommented prior to saving the file and the locale of en_US.UTF-8 will be used for the remainder of the steps.
+
+# /etc/locale.gen
+
+en_US.UTF-8 UTF-8 
+Generate the /etc/locale.conf file.
+
+[root@archiso /]# locale-gen
+Generating locales...
+  en_US.UTF-8... done
+Generation complete.
+Create and set the LANG variable.
+
+[root@archiso /]# echo LANG=en_US.UTF-8 > /etc/locale.conf
+[root@archiso /]# export LANG=en_US.UTF-8 
+Network Configuration
+Let’s use that text editor once more to give our machine a hostname and proper identity on the network.
+
+Create the /etc/hostname file and add the hostname entry. Then, save the file.
+
+[root@archiso /]# nano /etc/hostname
+This entry has been added:
+
+# /etc/hostname
+
+ArchLinuxPC
+Create the /etc/hosts file and add the proper entries. Then, save the file.
+
+[root@archiso /]# nano /etc/hosts
+These entries have been added:
+
+# /etc/hosts
+
+127.0.0.1 localhost
+::1 localhost
+127.0.1.1 ArchLinuxPC
+Root Password
+Finally, let’s give the root user a password for the sake of security.
+
+Use the passwd command to set the password for root.
+
+[root@archiso /]# passwd
+New password:
+Retype new password:
+passwd: password updated successfully
+Install Grand Unified Bootloader (GRUB)
+Up to this point, we have created a functional Arch Linux system. It has been installed on the root partition, but a bootloader is needed to properly and automatically load our newly installed system. There are a few choices when it comes to bootloaders. I have chosen to use GRUB as the bootloader of choice for this guide.
+
+Once again, we have two general methods of installing a bootloader: the UEFI and non-UEFI methods.
+
+NON-UEFI
+For our non-UEFI system, the process is shown below.
+
+Install the grub package.
+
+[root@archiso /]# pacman -S grub
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (1) grub-2:2.04-8
+
+Total Download Size:    6.74 MiB
+Total Installed Size:  32.91 MiB
+
+:: Proceed with installation? [Y/n] Y
+:: Retrieving packages...
+ grub-2:2.04-8-x86_64              6.7 MiB 6.97 MiB/s 00:01 [#################################] 100%
+(1/1) checking keys in keyring                              [#################################] 100%
+(1/1) checking package integrity                            [#################################] 100%
+(1/1) loading package files                                 [#################################] 100%
+(1/1) checking for file conflicts                           [#################################] 100%
+(1/1) checking available disk space                         [#################################] 100%
+:: Processing package changes...
+(1/1) installing grub                                       [#################################] 100%
+Generate your bootloader configuration with:
+  grub-mkconfig -o /boot/grub/grub.cfg
+Optional dependencies for grub
+    freetype2: For grub-mkfont usage
+    fuse2: For grub-mount usage
+    dosfstools: For grub-mkrescue FAT FS and EFI support
+    efibootmgr: For grub-install EFI support   
+    libisoburn: Provides xorriso for generating grub rescue iso using grub-mkrescue
+    os-prober: To detect other OSes when generating grub.cfg in BIOS systems
+    mtools: For grub-mkrescue FAT FS support
+:: Running post-transaction hooks...
+(1/1) Arming ConditionNeedsUpdate... 
+Install GRUB to the hard disk.
+
+[root@archiso /]# grub-install /dev/sda
+Installing for i386-pc platform.
+Installation finished. No error reported.
+Finally, generate the /boot/grub/grub.cfg file.
+
+[root@archiso /]# grub-mkconfig -o /boot/grub/grub.cfg
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-linux
+Found initrd image: /boot/initramfs-linux.img
+Found fallback initrd image(s) in /boot: initramfs-linux-fallback.img
+done
+UEFI
+Install the grub package.
+
+[root@archiso /]# pacman -S grub efibootmgr
+Create the directory where EFI partition will be mounted.
+
+[root@archiso /]# mkdir /boot/efi
+Mount the ESP partition.
+
+[root@archiso /]# mount /dev/sda1 /boot/efi
+Install GRUB to the hard disk.
+
+[root@archiso /]# grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
+Finally, generate the /boot/grub/grub.cfg file.
+
+[root@archiso /]# grub-mkconfig -o /boot/grub/grub.cfg
+Create a User Account
+This is an excellent opportunity to create a user account. A non-root account is a preferred method of logging into the graphical desktop environment which will be install in the next section. The method of creation for the user account will automatically create the home directory for the user as well. In addition, we can give this account sudo privileges. For that, we will also need to install the sudo command, itself.
+
+Add User and Home Directory
+Use the useradd command with the -m option to create a new user and to generate the home directory for the new user.
+
+[root@archiso /]# useradd -m deep
+User Password
+Set up user password.
+
+[root@archiso /]# passwd deep
+New password:
+Retype new password:
+passwd: password updated successfully
+Install sudo
+Install the sudo command.
+
+[root@archiso /]# pacman -S sudo
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (1) sudo-1.9.5.p2-1
+
+Total Download Size:    1.09 MiB
+Total Installed Size:   4.45 MiB
+
+:: Proceed with installation? [Y/n] Y
+:: Retrieving packages...
+ sudo-1.9.5.p2-1-x86_64         1116.4 KiB 15.6 MiB/s 00:01 [#################################] 100%
+(1/1) checking keys in keyring                              [#################################] 100%
+(1/1) checking package integrity                            [#################################] 100%
+(1/1) loading package files                                 [#################################] 100%
+(1/1) checking for file conflicts                           [#################################] 100%
+(1/1) checking available disk space                         [#################################] 100%
+:: Processing package changes...
+(1/1) installing sudo                                       [#################################] 100%
+:: Running post-transaction hooks...
+(1/3) Reloading system manager configuration...
+Running in chroot, ignoring command 'daemon-reload'
+(2/3) Creating temporary files...
+(3/3) Arming ConditionNeedsUpdate... 
+Give User sudo Privileges
+NOTE: The configuration file for sudo is /etc/sudoers. This file should always be edited with the visudo command. The visudo command locks the “sudoers” file, saves edits to a temporary file, and then checks the file’s syntax before copying it to /etc/sudoers.)
+
+Set an editor for use when launching visudo.
+
+[root@archiso /]# EDITOR=nano visudo
+Add the following line for the newly created user. Then, save the file.
+
+# /etc/sudoers
+
+deep ALL=(ALL) ALL
+Install a Desktop Environment
+If you thought swap partition sizes and text editors were controversial, they don’t compare to the tribalism that exists for desktop environments. But that’s what makes Linux amazing: the freedom to choose. There are many desktop environments that can be used with Arch Linux. My favorite desktop environments have been included below (in no particular order).
+
+Choose your desktop environment, perform the installation, and finalize the configuration. If you are unsure about the options presented during the installation of your desktop environment of choice, choose the defaulted options. Then, let’s reconnect in the Summary section of this tutorial.
+
+NOTE: KDE doesn’t allow the root user to login directly. You must initially login with the user account created in the previous section.
+
+GNOME
+Install the Xorg display server.
+
+[root@archiso /]# pacman -S xorg
+Install the GNOME desktop environment.
+
+[root@archiso /]# pacman -S gnome
+Enable the GDM display manager and Network Manager.
+
+[root@archiso /]# systemctl enable gdm.service
+[root@archiso /]# systemctl enable NetworkManager.service
+Exit from chroot.
+
+[root@archiso /]# exit
+Shutdown.
+
+root@archiso ~ # shutdown now
+Remove the live USB/medium and power back on.
+
+CINNAMON
+Install the Xorg display server.
+
+[root@archiso /]# pacman -S xorg
+Install the Xorg terminal.
+
+[root@archiso /]# pacman -S xterm
+Install the Cinnamon desktop environment.
+
+[root@archiso /]# pacman -S cinnamon
+Install the GDM display manager.
+
+[root@archiso /]# pacman -S gdm
+Enable the GDM display manager and Network Manager.
+
+NOTE: During the login process, look for a settings (gear) icon. This icon will allow you to choose the Cinammon desktop environment.
+
+[root@archiso /]# systemctl enable gdm.service
+[root@archiso /]# systemctl enable NetworkManager.service
+Exit from chroot.
+
+[root@archiso /]# exit
+Shutdown.
+
+root@archiso ~ # shutdown now
+Remove the live USB/medium and power back on.
+
+KDE
+Install the Xorg display server.
+
+[root@archiso /]# pacman -S xorg
+Install plasma, plasma-wayland-session, and kde-applications.
+
+[root@archiso /]# pacman -S plasma plasma-wayland-session kde-applications 
+Enable the SDDM display manager and Network Manager.
+
+[root@archiso /]# systemctl enable sddm.service
+[root@archiso /]# systemctl enable NetworkManager.service
+Exit from chroot.
+
+[root@archiso /]# exit
+Shutdown.
+
+root@archiso ~ # shutdown now
+Remove the live USB/medium and power back on.
+
+Summary
+Congratulations! You now have a working Arch Linux system which you have designed based on your choices and preferences. Arch, by default, is a rolling-release distribution. This means that you shouldn’t have to install it more than once for any system. One of the benefits (and drawbacks) of being a rolling release like Arch, is that you are always on the cutting edge (and sometimes bleeding edge) of system and software updates which, at times, can be unstable. Arch is an excellent distribution for a personal workstation or development machine. However, you should avoid deploying Arch on critical machines which are intended to run in a production environment. If (or when) you run into trouble, the Arch Wiki will be an excellent source of any further configuration, troubleshooting, or general/specific knowledge about a given topic.
+
+This was just the beginning; there is much more to install, configure, tweak, and learn. I hope that you have enjoyed this guide and have gained some insight into the installation of Arch Linux. You can now boast to your friends and colleagues about your distro of choice. Don’t hesitate to sprinkle in the occasional, “By the way, I use Arch” in casual conversations.
+
+There’s many more tutorials here on FrontPageLinux and If you’d like more from me then visit my author archive to find all of my previous articles / tutorials.
+
+
+Tags
+AMD Arch ARM Audio Btrfs Canonical Debian Desktop Desktop Environments Distros elementaryOS EndeavourOS Fedora GNOME Hardware KDE KDE Plasma Kernel Linux Linux++ Linux Mint Manjaro MX Linux Nitrux Open Source openSUSE Pine64 PinePhone Podcast Pop!_OS Red Hat Security Solus SUSE System76 Tutorial TUXEDO UBports Ubuntu Ubuntu Cinnamon Remix Ubuntu Flavours Ubuntu LTS Ubuntu MATE Unix Zorin OS
+
+RT @itguyeric: My latest blog post is LIVE out on @FrontPageLinux ! Have you been curious about @ansible or tired of running the same opera…
+
+Read More 
+Destination Linux Network15 hours ago
+Check out this cool video from Ryan @dasgeekchannel! 😀🐧 He takes a look at Chrome OS to see how it has progressed, the #Linux implementation expanding the capabilities of a Chromebook, and where does this device fit in? #DestinationLinux @digitalocean https://t.co/OmYU8TyvzK
+
+Read More 
+
+
+Front Page Linux is a proud member of the Destination Linux Network.
+
+
+mail@destinationlinux.network
+© Destination Linux Network
+
+site by Visuex.com
+
+
+TECH NEWS
+PC & MOBILE
+LIFESTYLE
+HARDWARE
+FREE STUFF
+DEALS
+ABOUT
+FOLLOW US
+
+
+HOME
+LINUX
+How to Install and Remove Packages in Arch Linux
+BY DEEPESH SHARMA
+PUBLISHED JAN 20, 2021
+Using Arch Linux? Installing and removing packages is different to Ubuntu and Mint. Here's what you need to know.
+
+add or remove packages on arch linux
+Want to install packages on Arch Linux but do not know how? A lot of people face this problem when they first migrate from Debian-based distributions to Arch. However, you can easily manage packages on your Arch-based system using package managers.
+
+Pacman is the default package manager that comes pre-installed in every Arch distribution. But still, there's a need for other package managers as Pacman doesn't support packages from the Arch User Repository.
+
+Package Managers in Arch Linux
+Although Arch Linux comes with Pacman as the default package manager, you can install other package managers such as Yay. Unlike Pacman, these package managers allow you to add new packages from the official Arch repository and the AUR (Arch User Repository).
+
+While other package managers have been used over the years, examples such as Yaourt and Aurman are no longer maintained. Consequently, Pacman and Yay are safer and more reliable package managers to rely on in Arch Linux.
+
+AUR is a community-organized repository that provides users with a platform to share packages developed by them. If you are a developer, you can add packages to the AUR, and other users can install them on their system with ease.
+
+1. Pacman
+As mentioned above, every Arch system comes with Pacman as its default package manager. The most notable feature of Pacman is that it regularly syncs your system's packages with the master server, and in turn, keeps your system up to date.
+
+2. Yay
+As the developers of Yaourt and Aurman won't be releasing any updates after the discontinuation, Arch users have started using Yay to add packages from the AUR. The main aim of Yay was to minimize user input and to provide a Pacman-like interface.
+
+You won't be able to install Yay using Pacman, as it does not support adding packages from the Arch User Repository directly. Therefore, you will have to install the Yay package manager manually using its Git repository. Here's how to install it on your system.
+
+Step 1: You will require git to clone the yay repository.
+
+pacman -S --needed git base-devel
+Step 2: Clone the repository to your local storage.
+
+git clone https://aur.archlinux.org/yay-git.git
+Step 3: Change the permissions of the folder.
+
+chmod 777 /yay-git
+Step 4: Navigate to the directory where you cloned the repository.
+
+cd yay-git
+Step 5: Use the makepkg command to build the package. Make sure that you do not run the following command as the root user, otherwise, it will raise an error.
+
+makepkg -si
+Updating and Upgrading Packages
+If you have just installed Arch Linux, then before you can add or remove packages, you will have to sync your system with the master servers by updating your local package list.
+
+Then, you can easily upgrade all of your packages to the latest version by downloading the files from official servers.
+
+Using Pacman
+To update your package list using Pacman, use the -Sy flag with the command.
+
+sudo pacman -Sy
+After synchronizing your system's package list with the master servers, you need to upgrade the packages. Use the -Syu flag to do the same. This command can take some time depending on the list of the packages and your network connectivity.
+
+sudo pacman -Syu
+You can save the effort of typing both of these commands by combining them using the -Syyu flag. Pacman will start downloading the latest packages automatically after updating the package list.
+
+sudo pacman -Syyu
+Using Yay
+The Yay package manager allows you to update and upgrade your packages efficiently using your terminal. To do this, just use the -Syu flag with the yay command.
+
+sudo yay -Syu
+Adding Packages
+Adding packages is easy once you know which commands to execute. All you have to do is type the package manager commands in the terminal.
+
+Flathub and Snap Store are two great GUI applications that you can use to install software and applications on your Linux machine.
+
+Install Packages With Pacman
+Pacman uses the TAR file extension to package applications. It works efficiently with the Arch Linux system architecture. To add a package, you have to use the -S flag with the default command as follows.
+
+sudo pacman -S packagename
+For example,
+
+sudo pacman -S cmatrix
+To install multiple packages at once, type in the name of all the packages divided by the space character.
+
+sudo pacman -S cmatrix vlc python
+You can also get information about packages after installing them. The output provides details about the name, version, architecture, and license of the package. To do this, replace the -S flag with -Qi in the default pacman command.
+
+pacman -Qi cmatrix
+Install Packages With Yay
+The syntax of the Yay install command is pretty similar to that of Pacman. To install a package using the Yay package manager, just use the -S flag with the default command.
+
+yay -S packagename
+Removing Packages in Arch
+Arch Linux gives you the control to remove packages once you don't need them, and that's one of the many reasons why you should install Arch Linux. You can remove almost any package from your system if you have the authorization, of course. Let's see how you can delete a package on Arch Linux.
+
+Remove Packages With Pacman
+Removing a package is easy as well. All you have to do is use -R instead of the -S flag in the default pacman command.
+
+sudo pacman -R cmatrix
+If the package is not present in your system, you will receive an error output that will state "error: target not found: packagename".
+
+Remove Packages With Yay
+To remove packages using Yay, add the -R flag to the default yay command. You can also use the -Rns flag to remove all unnecessary dependencies from your system.
+
+yay -R cmatrix
+yay -Rns cmatrix
+If you want to remove the packages that your system doesn't need, use the -Yc flag with the command.
+
+yay -Yc
+
+Managing Packages on Arch Linux
+There are multiple ways to add and remove packages on an Arch-based Linux distribution. You can use package managers such as Pacman, Yaourt, and Yay. While some package managers allow the download of packages from the Arch User Repository, others like Pacman do not support the AUR.
+
+If you are not a fan of package managers, you can always download the packages you want manually. Several websites are available on the internet that provide TAR, RPM, and DEB packages to Linux users.
+
+SHARE
+TWEET
+EMAIL
+deb-rpm-linux
+8 Sites for Downloading DEB or RPM Linux Apps
+Looking for Linux apps? Rather than install from terminal, you can download Linux apps in DEB and RPM format from these websites.
+
+READ NEXT
+RELATED TOPICS
+LINUX
+ABOUT THE AUTHOR
+
+Deepesh Sharma (72 Articles Published)
+Deepesh is the Junior Editor for Linux at MUO. He writes informational guides on Linux, aiming to provide a blissful experience to all newcomers. Not sure about movies, but if you want to talk about technology, he's your guy. In his free time, you can find him reading books, listening to different music genres, or playing his guitar.
+
+More From Deepesh Sharma
+SUBSCRIBE TO OUR NEWSLETTER
+Join our newsletter for tech tips, reviews, free ebooks, and exclusive deals!
+
+CLICK HERE TO SUBSCRIBE
+ON THE WIRE
+windows 11 logo feature bright
+Windows 11 Is a Free Upgrade for All Windows 10 Users
+hacker staring at pc ready to pounce
+4 Reasons Why You Should Never Use XAMPP on Your Production Server
+math solver
+How to Use Microsoft Edge's to Solve Math Problems
+windows-diagnostics
+15 Windows Diagnostics Tools to Check Your PC's Health
+master-google-drive
+You Can Now Block Annoying or Abusive Google Drive Users
+Windows PC displaying all open tabs
+How to Always Open Microsoft Edge With Previous Tabs
+TRENDING NOW
+android-mirror-pc-mac
+5 Ways to Share Files From PC or Laptop to Android Phone
+Command Prompt with flexing artm
+15 Windows Command Prompt (CMD) Commands You Must Know
+A screenshot of the Chrome Dinosaur Game, Olympic version, released to celebrate Tokyo 2021
+How to Play the Tokyo 2020 Olympics Dino Game in Chrome
+READ NEXT
+windows-10-faster
+14 Ways to Make Windows 10 Faster and Improve Performance
+houseplants on a window sill
+5 Sites That Can Help You With Houseplant Care
+Microsoft Word on laptop
+How to Fix Microsoft Word Spell Check Problems: 8 Tips and Fixes
+speedup-mobile-data
+Why Is Your Mobile Data So Slow? How to Speed It Up in 10 Steps
+what is a sound card feature
+What Is a Sound Card and How Does It Work?
+discord-voice-chat
+How to Clear Your Discord Cache to Free Up Wasted Space
+Photo of a Mac on a desk
+What Is the Alt Key on Mac? A Complete Guide
+sugardaddy
+We Responded to a Sugar Daddy So You Don’t Have To
+Write For Us Home Contact Us Terms Privacy Copyright About Us Fact Checking Policy Corrections Policy Ethics Policy Ownership Policy Partnership Disclaimer
+Copyright © 2021 www.makeuseof.com
+Linux Hint
+HOME
+SUBSCRIBE!
+NEWSLETTER
+WRITE FOR US
+PRIVACY
+TERMS
+Arch Linux
+How to Install Visual Studio Code Editor on ArchLinux
+9 months agoby Younis Said
+Visual Studio Code is free, open-source, incredibly robust, and one of the most acclaimed source-code editors out there. Developers around the world use Visual Studio Code to edit code for a variety of programming languages, most notably, Javascript, Java, and C++. Visual Studio Code is available for Linux, as well as more commercial operating systems, such as Windows and macOS. The software also comes with multiple extensions for file transfer protocol, which allows it to be used for web development.
+A developers survey conducted in 2019 places Visual Studio Code at #1, with well over 50% of respondents voting in favor. This level of popularity speaks to the utility of this extremely versatile coding editor.
+
+This tutorial will show you how to install Visual Studio Code on ArchLinux using Snaps.
+
+Step 1: Install Snap
+Snap is available in the Arch User Repository, so we will be downloading it from there.
+
+Enter the following code to install snap on your system:
+
+$ git clone https://aur.archlinux.org/snapd.git
+
+$ cd snapd
+
+$ makepkg -si
+
+Step 2: Enable Snap
+Once you install Snap, you will need to activate systemd, which overlooks the main communication socket, before proceeding to install Visual Studio Code.
+
+$ sudo systemctl enable --now snapd.socket
+
+Then, link the /var/lib/snapd/snap directory with /snap by entering the following:
+
+$ sudo ln -s /var/lib/snapd/snap /snap
+
+Step 3: Install Visual Studio Code from the AUR
+To download the installer package, enter the command below:
+
+$ curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/visual-studio-code-bin.tar.gz
+
+Then, to unzip the build files, enter:
+
+$ tar -xvf visual-studio-code-bin.tar.gz
+
+Switch to the extracted package directory by issuing the following code:
+
+$ cd visual-studio-code-bin
+
+Finally, enter the following to install Visual Studio Code:
+
+$ makepkg -si
+
+Conclusion
+This tutorial showed you how to install Visual Studio Code onto your Archlinux system with a snap package. Snap is a software packaging system that works across several Linux distributions and it allows users to obtain software packages onto their system.
+
+That is all we have for you today. Stick around at linuxhint.com for more tutorials like this, and happy coding!
+
+ABOUT THE AUTHOR
+
+Younis Said
+I am a freelancing software project developer, a software engineering graduate and a content writer. I love working with Linux and open-source software.
+
+View all posts
+RELATED LINUX HINT POSTS
+Install and Configure KVM in ArchLinux
+Install and Configure SSH Server on Arch Linux
+How to use PulseAudio in ArchLinux
+Configure Network Time Protocol on ArchLinux
+How to Install Samba on ArchLinux
+HOW TO INSTALL VISUAL STUDIO CODE EDITOR ON ARCHLINUX
+How to Set Up FDE in ArchLinux
+Linux Hint LLC, editor@linuxhint.com
+1210 Kelly Park Cir, Morgan Hill, CA 95037
+
+Linux Hint
+HOME
+SUBSCRIBE!
+NEWSLETTER
+WRITE FOR US
+PRIVACY
+TERMS
+Arch Linux
+Install and Configure SSH Server on Arch Linux
+9 months agoby Younis Said
+SSH is a network protocol that enables users to share data traffic securely within an unprotected network. It provides this protection through an SSH server, linking it to the connection between the central server and the client. Any network service can be made secure by Secure Shell, and SSH can be set up on almost any operating system.
+In the following short guide, we will look at SSH server installation and configuration on Arch Linux.
+
+Part 1: Installation
+Update the Arch Linux package repository
+Fire up the command line interface and type in the following code to update the Arch Linux package repository:
+
+$ sudo pacman -Syu
+
+As we can see in the screenshot above, the package repository is updated, and is now ready to install the SSH Server.
+
+Install the SSH Server on Arch Linux
+Next, download the Open SSH server from the official Arch Linux repository, which is going to install the Secure Shell for the Arch Linux system. Type in the following command:
+
+$ sudo pacman -S openssh
+
+Then, hit the y key on your keyboard and hit enter. The installation should be confirmed by the prompt.
+
+Part 2: Open SSH offline
+Fire up the Open SSH server
+With the Open SSH server installed, we can now use the Secure Shell while Open SSH is running. First, make sure that Open SSH is running in the background by typing in:
+
+$ sudo systemctl status sshd
+
+If the Open SSH server isn’t running, the terminal should say “inactive”. If that’s the case, you may run Open SSH by entering the following command:
+
+$ sudo systemctl start sshd
+Then, make sure if it is running by typing in again the following:
+
+$ sudo systemctl status sshd
+
+If Open SSH is running, the prompt will say “active” in green.
+If you want to terminate the SSH server, type in the following:
+
+$ sudo systemctl stop sshd
+
+You will see that the Open SSH server has stopped running.
+
+Automate SSH server startup upon system restart
+To automatically start the SSH server upon system reboot, you can use enter the following code:
+
+$ sudo systemctl enable sshd
+
+With the above command executed, the Open SSH server will be appended to the Arch Linux startup list. Alternatively, you can also remove Open SSH from the system startup with the following command:
+
+$ sudo systemctl disable sshd
+
+Open SSH has been removed from the automatic system startup list.
+
+Part 3: Joining servers
+Obtain your IP address
+With the Open SSH installed, we may proceed to connect it to the web. For this purpose, we will need the IP address of the corresponding machine Open SSH is installed in.
+
+In case you don’t know your machine’s IP address, run the following command, and the IP address will be displayed:
+
+$ ip a
+
+Notice that the IP address of the Open SSH server we’re using is 10.0.2.15, which is going to be different for your machine. Just two lines below, there’s the IPv6, which is fe80::74e2:85f1:7b09:e63f/64 for our network.
+
+Joining the SSH server to the web
+Now that we know the IP address, we can join the Open SSH server with another machine in our network. We can also connect it to a machine with an internet routable address.
+
+To establish a connection, type in the user credentials of the other machine and the IP address of your SSH server in the following command syntax:
+
+$ssh USERNAME@IP_ADDRESS
+
+Then, type “yes” and press enter.
+
+Now, type in the user credentials for your Open SSH server and hit enter. Once done, your machine should finally be connected to another machine within the SSH security protocol.
+
+Part 4: Configuration
+Locate the server files
+You can locate the Open SSH server files in the following location on your hard drive:
+
+#/etc/ssh/sshd_config
+Here, we may toggle some of the available modes to configure our Open SSH server. To obtain a list of all the options available that we can configure, type in the following code:
+
+$mansshd_config
+
+Let’s talk about some of these options.
+
+Toggle the default ports
+You can see that the default port SSH server listens to is port 22. Using this port optimizes the safety of the connection, and using other ports may have different benefits. We are also allowed to switch to any port of our choice.
+
+To change the port, we first have to edit the sshd_config files using the following code:
+
+$ sudo nano /etc/ssh/sshd_config
+
+You’ll be shown the following prompt:
+
+Now, you may deselect the default and switch to a different port.
+
+To keep the changes, press Ctrl+ x, hit the y button on your keyboard, then press the enter key.
+
+Next, type in the following to reboot the Open SSH server:
+
+$ sudo systemctl restart sshd
+Then, hook into the Open SSH by typing in the following line of code:
+
+$ ssh -p 22 USERNAME@IP_ADDRESS
+
+Enter your server’s password, then hit Enter.
+
+Improve the server security
+Changing some of the defaults can remarkably improve server security. For instance, you should immediately switch to a non-standard port from the default port 22 as it can give your server security an additional boost.
+
+Similarly, you should restrict root privileges to admins only. Permit Root Login is set to yes by default, so you’d have to disable it by yourself.
+
+Also, disable X11 forwarding to avoid having any X11 related problems in the future.
+
+Wrapping up
+In this tutorial, you’ve learned how to set up and configure an SSH server on Arch Linux. Secure Shell provides an additional layer of security and shields the traffic exchanged from data mining and other intruders. Setting up an SSH server is easy and a better alternative to password authentication, which is often susceptible to brute-forcing and many other attacks.
+
+ssh
+ABOUT THE AUTHOR
+
+Younis Said
+I am a freelancing software project developer, a software engineering graduate and a content writer. I love working with Linux and open-source software.
+
+View all posts
+RELATED LINUX HINT POSTS
+Install and Configure KVM in ArchLinux
+INSTALL AND CONFIGURE SSH SERVER ON ARCH LINUX
+How to use PulseAudio in ArchLinux
+Configure Network Time Protocol on ArchLinux
+How to Install Samba on ArchLinux
+How to Install Visual Studio Code Editor on ArchLinux
+How to Set Up FDE in ArchLinux
+Linux Hint LLC, editor@linuxhint.com
+1210 Kelly Park Cir, Morgan Hill, CA 95037
+
+
+Linux Hint
+HOME
+SUBSCRIBE!
+NEWSLETTER
+WRITE FOR US
+PRIVACY
+TERMS
+Arch Linux
+Configure Network Time Protocol on ArchLinux
+9 months agoby Younis Said
+In this tutorial, we will take a look at Network Time Protocol (NTP), a technique often used to sync the clock timing on Linux systems to Internet time. Synchronization between system and internet timing is important because of network latency, a parameter that can significantly alter the user’s experience on the web. NTP is capable of maintaining a network lag of just 10 milliseconds, which is an acceptable value.
+This tutorial will cover the installation and configuration of the NTP daemon in ArchLinux.
+
+Step 1: Install NTP daemon
+To install the NTP daemon, fire up the terminal and enter the following command:
+
+$ sudo pacman -S ntp
+
+This will install the NTP package on your system, which will assume function in client mode.
+
+Step 2: Connect to NTP server
+There are hierarchal layers to NTP servers. Each layer is called a strata. The first stratum, called starum 0, consists of sources that are time-independent. The next layer, stratum 1, consists of servers directly linked to stratum 0. The next layer, stratum 2, consists of sources connected to stratum 1, and the hierarchy continues in a similar fashion.
+
+Stratum 2 servers are used for web-server time synchronization. The NTP project pool provides a list of these, which you can access here: http://www.pool.ntp.org/
+
+
+You will want to choose the nearest to where your machine is situated, with the iburst option.
+
+Step 3: Set Up NTP server
+First, enable the orphan mode before setting up an NTP server on your system. To enable the orphan mode, issue the following command:
+
+$ tos orphan 15
+
+You will now set up the parameters to restrict client access for users looking to connect to your server. Suppose you want to restrict users to only read the contents on your server and keep user queries for the server’s time status at bay. To do so, you would run the following command:
+
+$ restrict default nomodify nopeer noquery
+
+To get detailed info on these parameters, check out the following link: https://jlk.fjfi.cvut.cz/arch/manpages/man/ntp.conf.5
+
+Step 4: Use NTP Server
+To use the NTP server, first, load the NTP package from the console with the -u option:
+
+$ sudo ntpd -u ntp:ntp
+
+Alternatively, you can use the -g option to boot the NTP server, which disables the panic-gate:
+
+$ sudo ntpd -g ntp:ntp
+
+The panic-gate is a threshold that mitigates the effects of time-jumps if the server time is being synchronized for the first time with an NTP server.
+
+To start the NTP daemon upon system reboot, use the ntpd.service:
+
+$ sudo systemctl start ntpd.service
+
+To view the synchronization status, enter the following:
+
+$ sudo ntpd -p
+
+After issuing the above command, you should also be shown a list of ntp servers. Some of these servers will have an asterisk before their name. These are the servers that are syncing with ntpd. Typically, it takes around 15-20 minutes for ntpd to select a server to sync with.
+
+If you are not running a server, you may also sync the time once per boot using the ntpdate.service
+
+Conclusion
+In this tutorial, we showed you how to set up an NTP server on your ArchLinux system. Hopefully, you found these instructions simple and easy to follow.
+
+ABOUT THE AUTHOR
+
+Younis Said
+I am a freelancing software project developer, a software engineering graduate and a content writer. I love working with Linux and open-source software.
+
+View all posts
+RELATED LINUX HINT POSTS
+Install and Configure KVM in ArchLinux
+Install and Configure SSH Server on Arch Linux
+How to use PulseAudio in ArchLinux
+CONFIGURE NETWORK TIME PROTOCOL ON ARCHLINUX
+How to Install Samba on ArchLinux
+How to Install Visual Studio Code Editor on ArchLinux
+How to Set Up FDE in ArchLinux
+Linux Hint LLC, editor@linuxhint.com
+1210 Kelly Park Cir, Morgan Hill, CA 95037
+
+
+
+
+
+Linux Hint
+HOME
+SUBSCRIBE!
+NEWSLETTER
+WRITE FOR US
+PRIVACY
+TERMS
+Arch Linux
+How to Install Samba on ArchLinux
+9 months agoby Younis Said
+Samba is a free and open-source software that provides a seamless means of file sharing between Windows and Linux/Unix systems on a network. Samba is essentially an open-source re-implementation of SMB (Server Messaging Block) and CIFS (Common Internet File System) networking protocols. Aside from sharing files between clients and hosts, Samba also allows for sharing, printing, and domain control services within the network.
+This tutorial will show you how to set up and configure Samba on an ArchLinux client or server.
+
+Installation
+To install Samba from the official repository, simply enter the following command:
+
+$ sudo pacman -S samba
+
+Samba should now be installed on your system.
+
+Configuration
+Before proceeding to configure Samba, first, copy the configuration file:
+
+$ sudo cp /etc/samba/smb.conf.default /etc/samba/smb.conf
+
+See that this configuration file does not have any misplaced syntax by running the following:
+
+$ testparm
+
+We will now create a Linux user by the name of dom. This Linux user wil have access to the server.
+
+$ sudo useradd dom
+$ sudo pdbedit -a -u dom
+
+The second command line creates a user account named dom. You will then be asked to give a new password to log in with. You can change this password anytime.
+
+$ sudo smbpasswd samba_user
+
+To save these changes, reboot the service by entering the following:
+
+$ sudo systemctl restart smbd nmbd
+
+Share Samba Services
+Enable Samba by running the following command:
+
+$ sudo systemctl start smbd nmbd
+
+To automatically start the Samba upon system boot, issue the following:
+
+$ sudo systemctl enable smbd nmbd
+
+Conclusion
+In this tutorial, you learned how to install and enable Samba on your ArchLinux system. Your client-server networks of either Linux or Windows can now share files and printing services. With Samba, your server can now exchange files with your remote clients. You can also provide centralized printing services if your server has a printer connected to it.
+
+That is all we have for you today. We hope that you found this guide easy to follow. To learn more, visit linuxhint.com.
+
+ABOUT THE AUTHOR
+
+Younis Said
+I am a freelancing software project developer, a software engineering graduate and a content writer. I love working with Linux and open-source software.
+
+View all posts
+RELATED LINUX HINT POSTS
+Install and Configure KVM in ArchLinux
+Install and Configure SSH Server on Arch Linux
+How to use PulseAudio in ArchLinux
+Configure Network Time Protocol on ArchLinux
+HOW TO INSTALL SAMBA ON ARCHLINUX
+How to Install Visual Studio Code Editor on ArchLinux
+How to Set Up FDE in ArchLinux
+Linux Hint LLC, editor@linuxhint.com
+1210 Kelly Park Cir, Morgan Hill, CA 95037
+
+Linux Hint
+HOME
+SUBSCRIBE!
+NEWSLETTER
+WRITE FOR US
+PRIVACY
+TERMS
+Arch Linux
+How to Set Up FDE in ArchLinux
+9 months agoby Younis Said
+
+Full disk encryption (FDE) is one of the best security measures you can take to protect data in your device’s storage. As the name implies, FDE encrypts the contents (files, software) of a storage drive in its entirety, including the operating system itself. FDE can be activated in Linux, Windows, and macOS, as well as Android systems.
+
+With FDE enabled on your device, you will need to provide an encryption key on each login attempt. Once you enter the correct encryption key, the disk is decrypted, and your device will boot as usual.
+
+FDE should not be confused with File Level Encryption (FLE), as the latter only protects individual files that have been encrypted manually by the user.
+
+It should also be noted that Full Disk Encryption only works as long as the user has logged out of the system. Once an authorized user logs into the system,
+
+Though not adequate on its own, FDE serves as a great first step toward securing your data from unauthorized access.
+
+In this tutorial, you will learn how to set up ArchLinux with Full Disk Encryption with UEFI firmware mode and in a GPT disk partition.
+
+Step 1: Set Boot Mode to UEFI
+To follow this guide, you will first need to set the boot mode to UEFI.
+
+To check if your system is already in UEFI, issue the following command to summon the efivars directory:
+
+$ ls /sys/firmware/efi/efivars
+If there is no error prompted before the directory, you can be sure that the system has booted in UEFI.
+
+If the system has not booted in UEFI, restart and press the menu key on your keyboard (which key that is depends upon the specific model you are using; look it up). Open the firmware tab and set the system to boot in UEFI mode.
+
+Step 2: Ensure System Clock Is Accurate
+Check if your system clock is up-to-date by entering the following:
+
+$ timedatectl set-ntp true
+The following syntax will set the time:
+
+$ timedatectl set-time "yyyy-MM-dd hh:mm:ss"
+Step 3: Separate Partitions in Storage
+To use gdisk to create root and boot partitions, issue the following:
+
+$ gdisk /dev/sda
+Next, delete pre-existing partitions by pressing o, and press n twice when asked for input. Then, press p to list the pre-existing partitions, press w to overwrite these partitions, and press y to confirm.
+
+Step 4: Ready Root Partition
+The next step is to set up a root partition. Do so by entering the following:
+
+$ cryptsetup luksFormat /dev/sda2
+
+$ cryptsetup open /dev/sda2 cryptroot
+
+$ mkfs.ext4 /dev/mapper/cryptroot
+Then, mount the encrypted root partition:
+
+$ mount /dev/mapper/cryptroot /mnt
+
+Step 5: Configure the Boot Partition
+Run the following command to create the boot partition:
+
+$ mkfs.fat -F32 /dev/sda1
+
+$ mkdir /mnt/boot
+Then, mount the partition by entering the following:
+
+$ mount /dev/sda1 /mnt/boot
+
+Step 6: Install Supporting Dependencies
+Issue the following command to produce an fstab file:
+
+$ genfstab -U /mnt >> /mnt/etc/fstab
+
+Then, download the vim and dhcpcd packages by entering the following:
+
+$ pacstrap /mnt base linux linux-firmware vim dhcpcd
+
+Step 7: Change Root Directory
+Use the following command to change the root directory:
+
+$ arch-chroot /mnt
+
+Step 8: Set Time Zones
+Be sure that the time zone is accurate to your location:
+
+$ ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+
+$ hwclock --systohc
+
+Step 9: Modify Relevant Locales
+Run the following command to list the relevant locales:
+
+$ locale-gen
+
+$ localectl set-locale LANG=en_US.UTF-8
+
+In particular, you will edit the /etc/locale.gen locale.
+
+Step 10: Change to mkinitcpio
+First, append the /etc/ hosts:
+
+# 127.0.0.1  localhost
+
+# ::1        localhost
+
+Then, look up and modify /etc/mkinitcpio.conf.
+
+Be sure to include the encrypt hooks and transfer the keyboard hooks so that the encrypt follows it.
+
+
+Issue the following command to produce the boot images:
+
+$ mkinitcpio -P
+
+Step 11: Enter Encryption Key
+$ passwd
+
+Step 12: Install ucode Package
+If you are using intel, type in the following command:
+
+$ pacman -S intel-ucode
+
+For AMD users, the command should be:
+
+$ pacman -S amd-ucode
+Step 13: Install and Set Up EFI Boot Manager
+To install an EFI boot manager, run the following command:
+
+$ bootctl install
+
+Step 14: Run Reboot
+Type exit, and then reboot.
+
+$ reboot
+Upon reboot, you will be prompted to enter a password.
+
+That is it! That is how you install ArchLinux with Full Disk Encryption.
+
+Conclusion
+One of the best ways to protect your phone, computer, and laptop devices from unauthorized logins is Full Disk Encryption.
+
+In this tutorial, you learned how to install ArchLinux with Full Disk Encryption. With FDE at your disposal, you no longer have to worry about other people intruding on your system.
+
+Hopefully, you found this tutorial helpful and easy to follow. Stick around at linuxhint.com for more posts related to data security.
+
+ABOUT THE AUTHOR
+
+Younis Said
+I am a freelancing software project developer, a software engineering graduate and a content writer. I love working with Linux and open-source software.
+
+View all posts
+RELATED LINUX HINT POSTS
+Install and Configure KVM in ArchLinux
+Install and Configure SSH Server on Arch Linux
+How to use PulseAudio in ArchLinux
+Configure Network Time Protocol on ArchLinux
+How to Install Samba on ArchLinux
+How to Install Visual Studio Code Editor on ArchLinux
+HOW TO SET UP FDE IN ARCHLINUX
+Linux Hint LLC, editor@linuxhint.com
+1210 Kelly Park Cir, Morgan Hill, CA 95037
+
+
+Linux Hint
+HOME
+SUBSCRIBE!
+NEWSLETTER
+WRITE FOR US
+PRIVACY
+TERMS
+Arch Linux
+Install and Configure KVM in ArchLinux
+9 months agoby Younis Said
+KVM stands for Kernel-based Virtual Machine. This software allows users to run multiple virtual machines with different operating systems, thus bypassing the need to follow more conventional means of using Virtualbox. KVM is free, open-source, and has been refined and improved over the last ten years.
+This article shows you how to install and configure KVM on your ArchLinux system.
+
+Part 1: Installing KVM
+The installation procedure for KVM is a bit complicated, as you must first check the system for the necessary prerequisites.
+
+Step 1: Check for Virtualization Support
+To check whether virtualization is enabled on your PC, issue the following command:
+
+$ LC_ALL=C lscpu | grep Virtualization
+
+The hardware specs to run KVM is VT-x for Intel processors and AMD-V for AMD processors. As such, if your system has the hardware to create virtual machines, you will see the following within the text you are displayed:
+
+Virtualization: VT-x
+or
+Virtualization: AMD-V
+
+If neither of these is displayed, it means that either your system cannot support virtualization, or it is disabled on the machine by the developers. If that is the case, you can enable virtualization upon restarting your system and entering the BIOS.
+
+Step 2: Search for Kernel Module
+To see whether your system has the kernel module to run KVM, enter the following command:
+
+$ zgrep CONFIG_KVM /proc/config.gz
+
+If you are using an AMD processor, you should see CONFIG_KVM_AMD (or CONFIG_KVM_INTEL if you are using intel) followed by =y or =m, then you are good to go.
+
+Step 3: Install KVM for ArchLinux
+Fire up the terminal and run the following code for a direct install of KVM:
+
+$ sudo pacman -S virt-manager qemu vde2 ebtables dnsmasq bridge-utils openbsd-netcat
+
+This should install KVM on your system.
+
+Step 4: Activate and Launch KVM
+Issue the following command to activate KVM:
+
+$ sudo systemctl enable libvirtd.service
+
+Next, enter the following:
+
+$ sudo systemctl start libvirtd.service
+
+Then, go to /applications and launch the VM manager.
+
+Part 2: Configuring KVM
+To continue using KVM with your standard Linux account, you can do so by modifying the libvirtd.conf file. Access the file by entering the following:
+
+$ sudo pacman -S vim
+$ sudo vim /etc/libvirt/libvirtd.conf
+
+Between line 80-90, there should be the term “lineabout unix_sock_group.” You will change this to libvirt.
+
+# unix_sock_group = "libvirt"
+Jump to the lines between 100-110 and change the unix_sock_rw_perms to = 0770
+
+# unix_sock_rw_perms = "0770"
+Then, issue the following code to include your standard Linux account with libvirt.
+
+$ sudo usermod -a -G libvirt $(whoami)
+
+$ newgrp libvirt
+
+Reboot the libvirt service to apply changes. To do so, issue the following code:
+
+$ sudo systemctl restart libvirtd.service
+
+You can now use your Linux account to use KVM.
+
+To create virtual machines within a virtual machine, enable Nested Virtualization by entering the following:
+
+$ sudo modprobe -r kvm_intel
+$ sudo modprobe kvm_intel nested=1
+
+To apply these changes, enter:
+
+$ echo "options kvm-intel nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf
+
+Conclusion
+This tutorial covered the installation and configuration of KVM on ArchLinux systems. If you have followed the instructions properly, you should have KVM set up on your system and ready to run Virtual Machines.
+
+kvm
+ABOUT THE AUTHOR
+
+Younis Said
+I am a freelancing software project developer, a software engineering graduate and a content writer. I love working with Linux and open-source software.
+
+View all posts
+RELATED LINUX HINT POSTS
+INSTALL AND CONFIGURE KVM IN ARCHLINUX
+Install and Configure SSH Server on Arch Linux
+How to use PulseAudio in ArchLinux
+Configure Network Time Protocol on ArchLinux
+How to Install Samba on ArchLinux
+How to Install Visual Studio Code Editor on ArchLinux
+How to Set Up FDE in ArchLinux
+Linux Hint LLC, editor@linuxhint.com
+1210 Kelly Park Cir, Morgan Hill, CA 95037
+
+
+Linux Hint
+HOME
+SUBSCRIBE!
+NEWSLETTER
+WRITE FOR US
+PRIVACY
+TERMS
+Arch Linux
+How to Remove a Package and Its Dependencies with Pacman on Arch Linux
+3 years agoby Shahriar Shovon
+When you install packages on Arch Linux with Pacman package manager, some other packages are also installed with it. These packages are called the dependencies of the package that you tried to install. It’s all good that Pacman resolves all the dependencies and installs them for you. It saves you from manually installing them one by one, which obviously is boring and time consuming.But the problem comes in when you try to remove the package from your Arch Linux system. By default, Pacman package manager will only remove the package that you tell it to, leaving the dependencies of that package installed. The problem with that is the unnecessary packages takes extra space on the hard drive. Of course that doesn’t matter when you have a big hard drive on your local computer, but if it’s a server that you rented online, you will have limited disk space. So saving a few megabytes to a few hundreds of megabytes is still worth it.
+
+In this article I will show you how to remove packages on Arch Linux along with their dependencies using Pacman package manager. Let’s get started.
+
+Finding Out the Dependencies of a Certain Package
+You can use pactree utility to find out the packages the package xyz depends on.
+
+NOTE: You don’t need pactree to remove all the dependencies along with the package. But I find it interesting as it helps you understand how packages on your Arch Linux system are dependent on each other.
+
+For example, you can check the dependency of the package filezilla with pactree as follows:
+
+$ pactree filezilla
+
+As you can see, pactree shows you a nicely formatted tree of dependencies of filezilla package.
+
+
+You can pass -d N parameter to pactree to only print a certain depth of the tree. Here N = 1, 2, 3, …
+
+When N=1, the direct dependency tree is printed.
+
+You can run the following command to find out the direct dependencies of filezilla with pactree:
+
+$ pactree -d 1 filezilla
+
+As you can see, the direct dependencies of filezilla is listed.
+
+
+You can print the list in plain format (not the tree format) with the following command:
+
+$ pactree -d 1 -u filezilla
+
+If you want, you can export the list to a file, let’s say filezilla.txt with the following command:
+
+$ pactree -d 1 -u filezilla > filezilla.txt
+
+Removing a Package and All the Dependencies with Pacman
+You can remove only a specific package, let’s say filezilla using Pacman with the following command:
+
+$ sudo pacman -R filezilla
+As you can see in the screenshot below, that command would remove the package, but it would leave all the dependencies of filezilla package installed. This is what I was taking about earlier.
+
+Remove Package Dependencies Pacman Arch Linux
+You can remove all the dependencies of filezilla as well with the following Pacman command:
+
+$ sudo pacman -Rcns filezilla
+
+As you can see in the screenshot below, all the direct dependencies are going to be removed as well. Just press y and then press <Enter> to remove all of these packages.
+
+
+As you can see, all the packages are removed.
+
+
+Removing Packages that Don’t Depend on Other Packages
+If you didn’t know what I showed you earlier, and removed packages with sudo pacman -R command, then your Arch Linux system may have a lot of unnecessary packages still installed. But don’t regret yet. There is a way to remove these unwanted packages and save disk spaces.
+
+You can run the following command to find out all the unnecessary packages (packages that don’t depend on other packages):
+
+$ pacman -Qdtq
+
+As you can see, on my Arch Linux machine, four unnecessary packages are installed.
+
+
+If your Arch Linux machine show a longer list, don’t be afraid as you don’t have to remove them one by one.
+
+You can remove all of these unnecessary packages with the following command:
+
+$ sudo pacman -R $(pacman -Qdtq)
+
+Press y and then press <Enter> to continue.
+
+
+As you can see, all the unnecessary packages are removed.
+
+
+That’s how you remove packages along with its dependencies and remove all the unnecessary packages with Pacman package manager on Arch Linux. Thanks for reading this article.
+
+ABOUT THE AUTHOR
+
+Shahriar Shovon
+Freelancer & Linux System Administrator. Also loves Web API development with Node.js and JavaScript. I was born in Bangladesh. I am currently studying Electronics and Communication Engineering at Khulna University of Engineering & Technology (KUET), one of the demanding public engineering universities of Bangladesh.
+
+View all posts
+RELATED LINUX HINT POSTS
+Install and Configure KVM in ArchLinux
+Install and Configure SSH Server on Arch Linux
+How to use PulseAudio in ArchLinux
+Configure Network Time Protocol on ArchLinux
+How to Install Samba on ArchLinux
+How to Install Visual Studio Code Editor on ArchLinux
+How to Set Up FDE in ArchLinux
+Linux Hint LLC, editor@linuxhint.com
+1210 Kelly Park Cir, Morgan Hill, CA 95037
+
+
+
+
+
+
+
+
+
+
+
+After installation of ArchLinuxOneDOS
+After installation of ArchLinuxOneDOS
+
+GNOME
+Install the Xorg display server.
+
+[root@archiso /]# pacman -S xorg
+Install the GNOME desktop environment.
+
+[root@archiso /]# pacman -S gnome
+Enable the GDM display manager and Network Manager.
+
+[root@archiso /]# systemctl enable gdm.service
+[root@archiso /]# systemctl enable NetworkManager.service
