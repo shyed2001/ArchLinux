@@ -1,0 +1,232 @@
+/* 
+Theme Name:     Hello Elementor Child
+Theme URI:      https://elementor.com/
+Description:    Hello Elementor Child is a child theme of Hello Elementor, created by Elementor team
+Author:         Elementor Team
+Author URI:     https://elementor.com/
+Template:       hello-elementor
+Version:        1.0.0
+Text Domain:    hello-elementor-child
+Tags:           flexible-header, custom-colors, custom-menu, custom-logo, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready
+*/
+
+/*
+    Add your custom styles here
+*/
+
+a:link, a:visited {
+    color: #3f5d81;
+}
+
+a:hover, a:active {
+    color: #4c709c;
+    /*color: #6EC1E4;*/
+}
+
+.elementor-widget-post-info {
+    margin: 0 !important;
+}
+
+.elementor-element-534169e p {
+    line-height: 1.8rem;
+    margin-top:2em;
+    margin-bottom:0;
+    font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 3.6rem;
+    margin-bottom: 0;
+    padding: 0 !important;
+}
+
+/* Block Quote */
+blockquote {
+	border-left: 5px solid gray;
+    padding-left: 15px;
+    margin-left: 15px;
+}
+
+figcaption {
+    text-align: center;
+    margin: .6em 0 0 0 !important;
+}
+
+.alignwide {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.page-numbers {
+    background-color: #e0e0e0;
+    padding: 3px 8px;
+    border: 1px solid #ccc;
+}
+
+.page-numbers.prev, .page-numbers.next {
+    background-color: #3a5476;
+    color: #eee;
+    border: 1px solid #2a3c55;
+    font-weight: bold;
+}
+
+.page-numbers.current {
+    background-color: #fff;
+    color: #333;
+}
+
+.fpl-home-head-tab .elementor-tab-title {
+    padding: 5px 10px 10px 10px !important;
+}
+
+.fpl-home-head-tab .elementor-tabs-content-wrapper {
+    display: none !important;
+}
+
+/* Code Block */
+pre.wp-block-code {
+    font-size: 14px;
+    font-family: DejaVu Sans Mono,monospace,sans-serif;
+    line-height: 1.30769231;
+    color: #f8f8f8;
+    background-color: #1b1b1b;
+    border-radius: 5px;
+    margin: 2em 0 0 0;
+    padding: 12px;
+    overflow: auto;
+    white-space: pre;
+    word-wrap: normal;
+    scrollbar-color: #444 transparent;
+}
+
+.wp-block-code code {
+    white-space: inherit;
+}
+
+/* Linux++ Excerpt */
+.linux-plusplus-excerpt .wp-block-media-text__content {
+    padding: 0 2%;
+}
+
+.linux-plusplus-excerpt .from-issue {
+    font-size: 1.3em;
+    margin: 0 0 5px 0;
+}
+
+.linux-plusplus-excerpt .read-issue {
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.elementor-1087 .elementor-element.elementor-element-a6fbfd7 .wp-block-pullquote p {
+    font-size: 1.7em;
+    margin-bottom: 0.8rem;
+}
+
+.elementor-1087 .elementor-element.elementor-element-a6fbfd7 .wp-block-quote p {
+    font-size: 1.2em;
+    margin-bottom: 0.7rem;
+}
+
+.elementor-element-636783d .elementor-post__title a:link,
+.elementor-element-636783d .elementor-post__title a:visited,
+.elementor-element-35535cd .elementor-post__title a:link,
+.elementor-element-35535cd .elementor-post__title a:visited,
+.elementor-element-fff7aa1 .elementor-post__title a:link,
+.elementor-element-fff7aa1 .elementor-post__title a:visited {
+    color: #ddd;
+}
+
+.elementor-element-636783d .elementor-post__title a:hover,
+.elementor-element-636783d .elementor-post__title a:active,
+.elementor-element-35535cd .elementor-post__title a:hover,
+.elementor-element-35535cd .elementor-post__title a:active,
+.elementor-element-fff7aa1 .elementor-post__title a:hover,
+.elementor-element-fff7aa1 .elementor-post__title a:active {
+    color: #fff;
+}
+
+/* Padding for comments */
+.comment-body {
+	margin-left: 15px;
+}
+
+.wp-block-image,
+.wp-block-gallery,
+.wp-block-embed,
+.wp-block-table,
+.wp-block-media-text {
+    margin: 3.2em 0 0 0;
+}
+
+.single-post h2 {
+    padding: 30px 0 16px 0;
+}
+
+/* Frontpage Hero Responsive */
+
+@media (min-width: 100px) {
+    .elementor-element-35535cd .elementor-posts .elementor-post__card .elementor-post__text {
+        padding: 10px 15px 10px 15px !important;
+        margin-bottom: 0 !important;
+        margin-top: -85px !important;
+        z-index: 5;
+        background-color: rgba(0,0,0,0.8);
+    }
+
+    .elementor-element-35535cd .elementor-posts--skin-classic .elementor-post__text {
+        padding: 10px 20px 10px 20px !important;
+        margin-bottom: 0 !important;
+        margin-top: -65px !important;
+        z-index: 5;
+        position: relative;
+        background-color: rgba(0,0,0,0.8);
+        display: none;
+    }
+
+    .elementor-element-35535cd .elementor-posts--skin-classic .elementor-post__thumbnail__link {
+        margin: 0 !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .elementor-element-35535cd .elementor-posts .elementor-post__card .elementor-post__text {
+        padding: 10px 15px 10px 15px !important;
+        margin-bottom: 0 !important;
+        margin-top: -85px !important;
+        z-index: 5;
+        background-color: rgba(0,0,0,0.8);
+    }
+
+    .elementor-element-35535cd .elementor-posts--skin-classic .elementor-post__text {
+        padding: 5px 10px 5px 10px !important;
+        margin-bottom: 0 !important;
+        margin-top: -65px !important;
+        z-index: 5;
+        position: relative;
+        background-color: rgba(0,0,0,0.8);
+        min-height: 65px;
+        display: block;
+    }
+}
+
+
+@media (min-width: 1025px) {
+    .elementor-element-35535cd .elementor-posts .elementor-post__card .elementor-post__text {
+        padding: 20px 30px 20px 30px !important;
+        margin-bottom: 0 !important;
+        margin-top: -85px !important;
+        z-index: 5;
+        background-color: rgba(0,0,0,0.8);
+    }
+
+    .elementor-element-35535cd .elementor-posts--skin-classic .elementor-post__text {
+        padding: 10px 20px 10px 20px !important;
+        margin-bottom: 0 !important;
+        margin-top: -65px !important;
+        z-index: 5;
+        position: relative;
+        background-color: rgba(0,0,0,0.8);
+        min-height: 57px;
+    }
+}

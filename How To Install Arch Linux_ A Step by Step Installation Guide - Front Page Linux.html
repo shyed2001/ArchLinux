@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<!-- saved from url=(0082)https://frontpagelinux.com/tutorials/how-to-install-arch-linux-installation-guide/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <script type="text/javascript" async="" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/matomo.js.download"></script><script type="text/javascript">if(!gform){document.addEventListener("gform_main_scripts_loaded",function(){gform.scriptsLoaded=!0}),window.addEventListener("DOMContentLoaded",function(){gform.domLoaded=!0});var gform={domLoaded:!1,scriptsLoaded:!1,initializeOnLoaded:function(o){gform.domLoaded&&gform.scriptsLoaded?o():!gform.domLoaded&&gform.scriptsLoaded?window.addEventListener("DOMContentLoaded",o):document.addEventListener("gform_main_scripts_loaded",o)},hooks:{action:{},filter:{}},addAction:function(o,n,r,t){gform.addHook("action",o,n,r,t)},addFilter:function(o,n,r,t){gform.addHook("filter",o,n,r,t)},doAction:function(o){gform.doHook("action",o,arguments)},applyFilters:function(o){return gform.doHook("filter",o,arguments)},removeAction:function(o,n){gform.removeHook("action",o,n)},removeFilter:function(o,n,r){gform.removeHook("filter",o,n,r)},addHook:function(o,n,r,t,i){null==gform.hooks[o][n]&&(gform.hooks[o][n]=[]);var e=gform.hooks[o][n];null==i&&(i=n+"_"+e.length),null==t&&(t=10),gform.hooks[o][n].push({tag:i,callable:r,priority:t})},doHook:function(o,n,r){if(r=Array.prototype.slice.call(r,1),null!=gform.hooks[o][n]){var t,i=gform.hooks[o][n];i.sort(function(o,n){return o.priority-n.priority});for(var e=0;e<i.length;e++)"function"!=typeof(t=i[e].callable)&&(t=window[t]),"action"==o?t.apply(null,r):r[0]=t.apply(null,r)}if("filter"==o)return r[0]},removeHook:function(o,n,r,t){if(null!=gform.hooks[o][n])for(var i=gform.hooks[o][n],e=i.length-1;0<=e;e--)null!=t&&t!=i[e].tag||null!=r&&r!=i[e].priority||i.splice(e,1)}}}</script>
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<title>How To Install Arch Linux: A Step by Step Installation Guide - Front Page Linux</title>
+<meta name="description" content="The installation of Arch has been and continues to be a rite-of-passage within the Linux community. Although there are many guides that discuss the steps needed to install Arch Linux, I couldn&#39;t resist writing my very own guide. This guide promises to be different by being a narrative-style approach to…">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://frontpagelinux.com/tutorials/how-to-install-arch-linux-installation-guide/">
+<meta name="author" content="Deep Grewal">
+<meta property="og:url" content="https://frontpagelinux.com/tutorials/how-to-install-arch-linux-installation-guide/">
+<meta property="og:site_name" content="Front Page Linux">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How To Install Arch Linux: A Step by Step Installation Guide - Front Page Linux">
+<meta property="og:description" content="The installation of Arch has been and continues to be a rite-of-passage within the Linux community. Although there are many guides that discuss the steps needed to install Arch Linux, I couldn&#39;t resist writing my very own guide. This guide promises to be different by being a narrative-style approach to…">
+<meta property="og:image" content="https://frontpagelinux.com/wp-content/uploads/2021/03/arch-linux-install-guide-frontpagelinux.jpg">
+<meta property="og:image:secure_url" content="https://frontpagelinux.com/wp-content/uploads/2021/03/arch-linux-install-guide-frontpagelinux.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How To Install Arch Linux: A Step by Step Installation Guide - Front Page Linux">
+<meta name="twitter:description" content="The installation of Arch has been and continues to be a rite-of-passage within the Linux community. Although there are many guides that discuss the steps needed to install Arch Linux, I couldn&#39;t resist writing my very own guide. This guide promises to be different by being a narrative-style approach to…">
+<meta name="twitter:image" content="https://frontpagelinux.com/wp-content/uploads/2021/03/arch-linux-install-guide-frontpagelinux-768x432.jpg">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Front Page Linux » Feed" href="https://frontpagelinux.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Front Page Linux » Comments Feed" href="https://frontpagelinux.com/comments/feed/">
+        <script type="application/ld+json">
+            {"@context":"https:\/\/schema.org","@type":"Organization","name":"Front Page Linux","url":"https:\/\/frontpagelinux.com"}        </script>
+        <link rel="alternate" type="application/rss+xml" title="Front Page Linux » How To Install Arch Linux: A Step by Step Installation Guide Comments Feed" href="https://frontpagelinux.com/tutorials/how-to-install-arch-linux-installation-guide/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/frontpagelinux.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crp-style-masonry-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/masonry.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="comment_styles-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/comments.css" type="text/css" media="all">
+<link rel="stylesheet" id="5e0943cb8-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/5e0943cb8.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="hello-elementor-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/style.min(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="hello-elementor-child-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="hello-elementor-theme-style-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/theme.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-icons-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/elementor-icons.min.css" type="text/css" media="all">
+<style id="elementor-icons-inline-css" type="text/css">
+
+		.elementor-add-new-section .elementor-add-templately-promo-button{
+            background-color: #5d4fff;
+            background-image: url(https://frontpagelinux.com/wp-content/plugins/essential-addons-for-elementor-lite/assets/admin/images/templately/logo-icon.svg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin-left: 5px;
+            position: relative;
+            bottom: 5px;
+        }
+</style>
+<link rel="stylesheet" id="elementor-frontend-legacy-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/frontend-legacy.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-frontend-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/frontend.min.css" type="text/css" media="all">
+<style id="elementor-frontend-inline-css" type="text/css">
+@font-face{font-family:eicons;src:url(https://frontpagelinux.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0);src:url(https://frontpagelinux.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0#iefix) format("embedded-opentype"),url(https://frontpagelinux.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff2?5.10.0) format("woff2"),url(https://frontpagelinux.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff?5.10.0) format("woff"),url(https://frontpagelinux.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.ttf?5.10.0) format("truetype"),url(https://frontpagelinux.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.svg?5.10.0#eicon) format("svg");font-weight:400;font-style:normal}
+</style>
+<link rel="stylesheet" id="elementor-post-746-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/post-746.css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-pro-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/frontend.min(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-post-1052-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/post-1052.css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-post-975-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/post-975.css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-post-1087-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/post-1087.css" type="text/css" media="all">
+<link rel="stylesheet" id="google-fonts-1-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-icons-shared-0-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/fontawesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-icons-fa-brands-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/brands.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-icons-fa-regular-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/regular.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-icons-fa-solid-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/solid.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/jquery.min.js.download" id="jquery-core-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/jquery-migrate.min.js.download" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="icwp-wpsf-shield-notbot-js-extra">
+/* <![CDATA[ */
+var shield_vars_notbotjs = {"ajax":{"not_bot":"action=icwp-wpsf&exec=not_bot&exec_nonce=72e5e35afe&mod_slug=icwp-wpsf-ips"},"hrefs":{"ajax":"https:\/\/frontpagelinux.com\/wp-admin\/admin-ajax.php"},"flags":{"run":true}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/notbot.js.download" id="icwp-wpsf-shield-notbot-js"></script>
+<script type="text/javascript" id="icwp-wpsf-shield-loginbot-js-extra">
+/* <![CDATA[ */
+var icwp_wpsf_vars_lpantibot = {"form_selectors":"","uniq":"60ffa2a99fe8d","cbname":"icwp-wpsf-5f636bcd0258a","strings":{"label":"I'm a human.","alert":"Please check the box to show us you're a human.","loading":"Loading"},"flags":{"gasp":true,"captcha":false}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/loginbot.js.download" id="icwp-wpsf-shield-loginbot-js"></script>
+<link rel="https://api.w.org/" href="https://frontpagelinux.com/wp-json/"><link rel="alternate" type="application/json" href="https://frontpagelinux.com/wp-json/wp/v2/posts/8507"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://frontpagelinux.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://frontpagelinux.com/wp-includes/wlwmanifest.xml"> 
+<link rel="shortlink" href="https://frontpagelinux.com/?p=8507">
+<link rel="alternate" type="application/json+oembed" href="https://frontpagelinux.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ffrontpagelinux.com%2Ftutorials%2Fhow-to-install-arch-linux-installation-guide%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://frontpagelinux.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ffrontpagelinux.com%2Ftutorials%2Fhow-to-install-arch-linux-installation-guide%2F&amp;format=xml">
+<!-- Analytics by WP-Statistics v13.0.8 - https://wp-statistics.com/ -->
+<link rel="icon" href="https://frontpagelinux.com/wp-content/uploads/cropped-fpl-logomark-favicon-2-32x32.png" sizes="32x32">
+<link rel="icon" href="https://frontpagelinux.com/wp-content/uploads/cropped-fpl-logomark-favicon-2-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://frontpagelinux.com/wp-content/uploads/cropped-fpl-logomark-favicon-2-180x180.png">
+<meta name="msapplication-TileImage" content="https://frontpagelinux.com/wp-content/uploads/cropped-fpl-logomark-favicon-2-270x270.png">
+</head>
+<body class="post-template-default single single-post postid-8507 single-format-standard wp-custom-logo elementor-default elementor-kit-746 elementor-page-1087 e--ua-blink e--ua-chrome e--ua-webkit" data-elementor-device-mode="desktop">
+
+		<div data-elementor-type="header" data-elementor-id="1052" class="elementor elementor-1052 elementor-location-header" data-elementor-settings="[]">
+		<div class="elementor-section-wrap">
+					<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-55d86d3d elementor-section-content-middle elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="55d86d3d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-no">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-608a43a9" data-id="608a43a9" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-68e37eef elementor-position-left elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="68e37eef" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img width="150" height="150" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/dln-favicon-150x150.png" class="attachment-thumbnail size-thumbnail" alt="" loading="lazy" srcset="https://frontpagelinux.com/wp-content/uploads/2021/06/dln-favicon-150x150.png 150w, https://frontpagelinux.com/wp-content/uploads/2021/06/dln-favicon-300x300.png 300w, https://frontpagelinux.com/wp-content/uploads/2021/06/dln-favicon.png 720w" sizes="(max-width: 150px) 100vw, 150px"></figure><div class="elementor-image-box-content"><p class="elementor-image-box-description">FPL is part of the <a href="https://destinationlinux.network/"><strong>Destination Linux Network</strong></a></p></div></div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-5a34e97c elementor-hidden-phone" data-id="5a34e97c" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-inner-section elementor-element elementor-element-1064e68 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="1064e68" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-922aaca" data-id="922aaca" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-40d7053f elementor-icon-list--layout-inline elementor-align-right elementor-mobile-align-left elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="40d7053f" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items elementor-inline-items">
+							<li class="elementor-icon-list-item elementor-inline-item">
+										<span class="elementor-icon-list-text">DLN Community:</span>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+					<a href="https://discourse.destinationlinux.network/">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-discourse"></i>						</span>
+										<span class="elementor-icon-list-text"></span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+					<a href="https://matrix.to/#/#chativerse:destinationlinux.network?via=destinationlinux.network&amp;via=matrix.org" target="_blank">						<span class="elementor-icon-list-icon">
+							<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67.999802 67.999802" id="svg14"><metadata></metadata><defs id="defs18"></defs><path d="M 23.7614,4.0929 C 23.7614,1.8324 25.5976,0 27.8628,0 43.2153,0 55.661,12.4198 55.661,27.7405 c 0,2.2604 -1.8363,4.0929 -4.1014,4.0929 -2.2652,0 -4.1014,-1.8325 -4.1014,-4.0929 0,-10.7998 -8.7732,-19.5547 -19.5954,-19.5547 -2.2652,0 -4.1014,-1.8325 -4.1014,-4.0929 z" id="path4"></path><path d="m 63.8985,23.6476 c 2.2651,0 4.1013,1.8324 4.1013,4.0929 0,15.3206 -12.4456,27.7405 -27.7982,27.7405 -2.2651,0 -4.1014,-1.8325 -4.1014,-4.0929 0,-2.2605 1.8363,-4.0929 4.1014,-4.0929 10.8223,0 19.5955,-8.755 19.5955,-19.5547 0,-2.2605 1.8362,-4.0929 4.1014,-4.0929 z" id="path6"></path><path d="m 44.303,63.9069 c 0,2.2605 -1.8363,4.0929 -4.1014,4.0929 -15.3525,0 -27.7982,-12.4199 -27.7982,-27.7405 0,-2.2605 1.8363,-4.0929 4.1014,-4.0929 2.2651,0 4.1014,1.8324 4.1014,4.0929 0,10.7998 8.7732,19.5547 19.5954,19.5547 2.2651,0 4.1014,1.8325 4.1014,4.0929 z" id="path8"></path><path d="M 4.1013,44.3522 C 1.8362,44.3522 0,42.5198 0,40.2593 -9.9999397e-5,24.9387 12.4456,12.5188 27.7982,12.5188 c 2.2651,0 4.1014,1.8325 4.1014,4.0929 0,2.2605 -1.8363,4.0929 -4.1014,4.0929 -10.8223,0 -19.5955,8.755 -19.5955,19.5547 0,2.2605 -1.8362,4.0929 -4.1014,4.0929 z" id="path10"></path></svg>						</span>
+										<span class="elementor-icon-list-text"></span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+					<a href="https://destinationlinux.network/telegram" target="_blank">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-telegram-plane"></i>						</span>
+										<span class="elementor-icon-list-text"></span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+					<a href="https://destinationlinux.network/discord" target="_blank">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-discord"></i>						</span>
+										<span class="elementor-icon-list-text"></span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+					<a href="https://steamcommunity.com/groups/DestinationLinux" target="_blank">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-steam"></i>						</span>
+										<span class="elementor-icon-list-text"></span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+					<a href="https://www.twitch.tv/destinationlinux" target="_blank">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-twitch"></i>						</span>
+										<span class="elementor-icon-list-text"></span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+					<a href="https://destinationlinux.network/youtubelink" target="_blank">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-youtube"></i>						</span>
+										<span class="elementor-icon-list-text"></span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+					<a href="https://destinationlinux.network/community" target="_blank">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="far fa-arrow-alt-circle-right"></i>						</span>
+										<span class="elementor-icon-list-text"></span>
+											</a>
+									</li>
+						</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-2187939d elementor-section-content-middle elementor-section-full_width elementor-section-height-default elementor-section-height-default elementor-sticky elementor-sticky--effects elementor-sticky--active elementor-section--handles-inside" data-id="2187939d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;sticky&quot;:&quot;top&quot;,&quot;sticky_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;sticky_offset&quot;:0,&quot;sticky_effects_offset&quot;:0}" style="position: fixed; width: 1349px; margin-top: 0px; margin-bottom: 0px; top: 0px;">
+						<div class="elementor-container elementor-column-gap-extended">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2de3df70" data-id="2de3df70" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-6a5c7bb8 elementor-widget elementor-widget-theme-site-logo elementor-widget-image" data-id="6a5c7bb8" data-element_type="widget" data-widget_type="theme-site-logo.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="https://frontpagelinux.com/">
+							<img width="400" height="54" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/fpl-blocks-logo.png" class="attachment-full size-full" alt="" loading="lazy" srcset="https://frontpagelinux.com/wp-content/uploads/fpl-blocks-logo.png 400w, https://frontpagelinux.com/wp-content/uploads/fpl-blocks-logo-300x41.png 300w" sizes="(max-width: 400px) 100vw, 400px">								</a>
+														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-6ad9069e" data-id="6ad9069e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-3c6ed681 elementor-nav-menu__align-right elementor-nav-menu--stretch elementor-nav-menu__text-align-center elementor-nav-menu--dropdown-tablet elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="3c6ed681" data-element_type="widget" data-settings="{&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;fas fa-caret-down&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav migration_allowed="1" migrated="0" role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-background e--animation-shutter-out-horizontal"><ul id="menu-1-3c6ed681" class="elementor-nav-menu" data-smartmenus-id="16273660616990393"><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-782"><a href="https://frontpagelinux.com/category/news/" class="elementor-item">News</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-781"><a href="https://frontpagelinux.com/category/articles/" class="elementor-item">Articles</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-783"><a href="https://frontpagelinux.com/category/tutorials/" class="elementor-item">Tutorials</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-784"><a href="https://frontpagelinux.com/category/videos/" class="elementor-item">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-552"><a href="https://frontpagelinux.com/about/" class="elementor-item">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-553"><a href="https://frontpagelinux.com/contact/" class="elementor-item">Contact</a></li>
+</ul></nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false" style="">
+			<i class="eicon-menu-bar" aria-hidden="true" role="presentation"></i>
+			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true" style="top: 44px; width: 1349px; left: 0px;"><ul id="menu-2-3c6ed681" class="elementor-nav-menu" data-smartmenus-id="16273660617032703"><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-782"><a href="https://frontpagelinux.com/category/news/" class="elementor-item" tabindex="-1">News</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-781"><a href="https://frontpagelinux.com/category/articles/" class="elementor-item" tabindex="-1">Articles</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-783"><a href="https://frontpagelinux.com/category/tutorials/" class="elementor-item" tabindex="-1">Tutorials</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-784"><a href="https://frontpagelinux.com/category/videos/" class="elementor-item" tabindex="-1">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-552"><a href="https://frontpagelinux.com/about/" class="elementor-item" tabindex="-1">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-553"><a href="https://frontpagelinux.com/contact/" class="elementor-item" tabindex="-1">Contact</a></li>
+</ul></nav>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-39217ab" data-id="39217ab" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-52e0a323 elementor-search-form--skin-full_screen elementor-widget elementor-widget-search-form" data-id="52e0a323" data-element_type="widget" data-settings="{&quot;skin&quot;:&quot;full_screen&quot;}" data-widget_type="search-form.default">
+				<div class="elementor-widget-container">
+					<form class="elementor-search-form" role="search" action="https://frontpagelinux.com/" method="get">
+									<div class="elementor-search-form__toggle">
+				<i aria-hidden="true" class="fas fa-search"></i>				<span class="elementor-screen-only">Search</span>
+			</div>
+						<div class="elementor-search-form__container">
+								<input placeholder="Search..." class="elementor-search-form__input" type="search" name="s" title="Search" value="">
+																<div class="dialog-lightbox-close-button dialog-close-button">
+					<i class="eicon-close" aria-hidden="true"></i>
+					<span class="elementor-screen-only">Close</span>
+				</div>
+							</div>
+		</form>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section><section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-2187939d elementor-section-content-middle elementor-section-full_width elementor-section-height-default elementor-section-height-default elementor-sticky elementor-sticky__spacer" data-id="2187939d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;sticky&quot;:&quot;top&quot;,&quot;sticky_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;sticky_offset&quot;:0,&quot;sticky_effects_offset&quot;:0}" style="visibility: hidden; transition: none 0s ease 0s; animation: 0s ease 0s 1 normal none running none;">
+						<div class="elementor-container elementor-column-gap-extended">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2de3df70" data-id="2de3df70" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-6a5c7bb8 elementor-widget elementor-widget-theme-site-logo elementor-widget-image" data-id="6a5c7bb8" data-element_type="widget" data-widget_type="theme-site-logo.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="https://frontpagelinux.com/">
+							<img width="400" height="54" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/fpl-blocks-logo.png" class="attachment-full size-full" alt="" loading="lazy" srcset="https://frontpagelinux.com/wp-content/uploads/fpl-blocks-logo.png 400w, https://frontpagelinux.com/wp-content/uploads/fpl-blocks-logo-300x41.png 300w" sizes="(max-width: 400px) 100vw, 400px">								</a>
+														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-6ad9069e" data-id="6ad9069e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-3c6ed681 elementor-nav-menu__align-right elementor-nav-menu--stretch elementor-nav-menu__text-align-center elementor-nav-menu--dropdown-tablet elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="3c6ed681" data-element_type="widget" data-settings="{&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;fas fa-caret-down&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav migration_allowed="1" migrated="0" role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-background e--animation-shutter-out-horizontal"><ul id="menu-1-3c6ed681" class="elementor-nav-menu" data-smartmenus-id="16273660616990393"><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-782"><a href="https://frontpagelinux.com/category/news/" class="elementor-item">News</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-781"><a href="https://frontpagelinux.com/category/articles/" class="elementor-item">Articles</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-783"><a href="https://frontpagelinux.com/category/tutorials/" class="elementor-item">Tutorials</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-784"><a href="https://frontpagelinux.com/category/videos/" class="elementor-item">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-552"><a href="https://frontpagelinux.com/about/" class="elementor-item">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-553"><a href="https://frontpagelinux.com/contact/" class="elementor-item">Contact</a></li>
+</ul></nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false" style="">
+			<i class="eicon-menu-bar" aria-hidden="true" role="presentation"></i>
+			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true" style="width: 1349px; left: 0px; top: 44px;"><ul id="menu-2-3c6ed681" class="elementor-nav-menu" data-smartmenus-id="16273660617032703"><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-782"><a href="https://frontpagelinux.com/category/news/" class="elementor-item" tabindex="-1">News</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-781"><a href="https://frontpagelinux.com/category/articles/" class="elementor-item" tabindex="-1">Articles</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-783"><a href="https://frontpagelinux.com/category/tutorials/" class="elementor-item" tabindex="-1">Tutorials</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-784"><a href="https://frontpagelinux.com/category/videos/" class="elementor-item" tabindex="-1">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-552"><a href="https://frontpagelinux.com/about/" class="elementor-item" tabindex="-1">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-553"><a href="https://frontpagelinux.com/contact/" class="elementor-item" tabindex="-1">Contact</a></li>
+</ul></nav>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-39217ab" data-id="39217ab" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-52e0a323 elementor-search-form--skin-full_screen elementor-widget elementor-widget-search-form" data-id="52e0a323" data-element_type="widget" data-settings="{&quot;skin&quot;:&quot;full_screen&quot;}" data-widget_type="search-form.default">
+				<div class="elementor-widget-container">
+					<form class="elementor-search-form" role="search" action="https://frontpagelinux.com/" method="get">
+									<div class="elementor-search-form__toggle">
+				<i aria-hidden="true" class="fas fa-search"></i>				<span class="elementor-screen-only">Search</span>
+			</div>
+						<div class="elementor-search-form__container">
+								<input placeholder="Search..." class="elementor-search-form__input" type="search" name="s" title="Search" value="">
+																<div class="dialog-lightbox-close-button dialog-close-button">
+					<i class="eicon-close" aria-hidden="true"></i>
+					<span class="elementor-screen-only">Close</span>
+				</div>
+							</div>
+		</form>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				</div>
+		</div>
+				<div data-elementor-type="single" data-elementor-id="1087" class="elementor elementor-1087 elementor-location-single post-8507 post type-post status-publish format-standard has-post-thumbnail hentry category-tutorials tag-arch tag-distros tag-guide tag-tutorial" data-elementor-settings="[]">
+		<div class="elementor-section-wrap">
+					<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-869bec1 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="869bec1" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-534169e" data-id="534169e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-15accb4 elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading" data-id="15accb4" data-element_type="widget" data-widget_type="theme-post-title.default">
+				<div class="elementor-widget-container">
+			<h1 class="elementor-heading-title elementor-size-default" data-speechify-sentence="">How To Install Arch Linux: A Step by Step Installation Guide</h1>		</div>
+				</div>
+				<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-inner-section elementor-element elementor-element-5cb6428 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5cb6428" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-0053b5e" data-id="0053b5e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-bbc17f2 elementor-align-left elementor-widget__width-auto elementor-widget elementor-widget-post-info" data-id="bbc17f2" data-element_type="widget" data-widget_type="post-info.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-inline-items elementor-icon-list-items elementor-post-info">
+					<li class="elementor-icon-list-item elementor-repeater-item-7262636 elementor-inline-item" itemprop="author">
+						<a href="https://frontpagelinux.com/author/deepgrewal/">
+											<span class="elementor-icon-list-icon">
+								<img class="elementor-avatar" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/deep-grewal-avatar.png" alt="Deep Grewal">
+							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-author">
+										Deep Grewal					</span>
+									</a>
+				</li>
+				<li class="elementor-icon-list-item elementor-repeater-item-7c3c9fa elementor-inline-item" itemprop="datePublished">
+						<a href="https://frontpagelinux.com/2021/03/12/">
+											<span class="elementor-icon-list-icon">
+								<i aria-hidden="true" class="fas fa-calendar"></i>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-date">
+										March 12, 2021					</span>
+									</a>
+				</li>
+				</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-e6136b4" data-id="e6136b4" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-d11f860 elementor-align-right elementor-widget__width-auto elementor-widget elementor-widget-post-info" data-id="d11f860" data-element_type="widget" data-widget_type="post-info.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-inline-items elementor-icon-list-items elementor-post-info">
+					<li class="elementor-icon-list-item elementor-repeater-item-cc695d8 elementor-inline-item" itemprop="commentCount">
+						<a href="https://frontpagelinux.com/tutorials/how-to-install-arch-linux-installation-guide/#respond">
+											<span class="elementor-icon-list-icon">
+								<i aria-hidden="true" class="fas fa-comments"></i>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-comments">
+										No Comments					</span>
+									</a>
+				</li>
+				</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<div class="elementor-element elementor-element-77a3f4a dc-has-condition dc-condition-contains elementor-widget elementor-widget-theme-post-featured-image elementor-widget-image" data-id="77a3f4a" data-element_type="widget" data-widget_type="theme-post-featured-image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img width="768" height="432" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/arch-linux-install-guide-frontpagelinux-768x432.jpg" class="attachment-large size-large" alt="" loading="lazy" srcset="https://frontpagelinux.com/wp-content/uploads/2021/03/arch-linux-install-guide-frontpagelinux-768x432.jpg 768w, https://frontpagelinux.com/wp-content/uploads/2021/03/arch-linux-install-guide-frontpagelinux-300x169.jpg 300w, https://frontpagelinux.com/wp-content/uploads/2021/03/arch-linux-install-guide-frontpagelinux-150x84.jpg 150w, https://frontpagelinux.com/wp-content/uploads/2021/03/arch-linux-install-guide-frontpagelinux-1536x864.jpg 1536w, https://frontpagelinux.com/wp-content/uploads/2021/03/arch-linux-install-guide-frontpagelinux.jpg 1920w" sizes="(max-width: 768px) 100vw, 768px">														</div>
+						</div>
+				</div>
+				<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-inner-section elementor-element elementor-element-219c27a elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="219c27a" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-3059222" data-id="3059222" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-9bf2554 elementor-widget elementor-widget-text-editor" data-id="9bf2554" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+					<p>Share:</p>					</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-bd36255" data-id="bd36255" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-d5d1859 elementor-share-buttons--view-icon elementor-share-buttons--skin-gradient elementor-share-buttons--shape-square elementor-grid-0 elementor-share-buttons--color-official elementor-widget elementor-widget-share-buttons" data-id="d5d1859" data-element_type="widget" data-widget_type="share-buttons.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-grid">
+								<div class="elementor-grid-item">
+						<div class="elementor-share-btn elementor-share-btn_twitter">
+															<span class="elementor-share-btn__icon">
+								<i class="fab fa-twitter" aria-hidden="true"></i>								<span class="elementor-screen-only">Share on twitter</span>
+							</span>
+																				</div>
+					</div>
+									<div class="elementor-grid-item">
+						<div class="elementor-share-btn elementor-share-btn_facebook">
+															<span class="elementor-share-btn__icon">
+								<i class="fab fa-facebook" aria-hidden="true"></i>								<span class="elementor-screen-only">Share on facebook</span>
+							</span>
+																				</div>
+					</div>
+									<div class="elementor-grid-item">
+						<div class="elementor-share-btn elementor-share-btn_reddit">
+															<span class="elementor-share-btn__icon">
+								<i class="fab fa-reddit" aria-hidden="true"></i>								<span class="elementor-screen-only">Share on reddit</span>
+							</span>
+																				</div>
+					</div>
+									<div class="elementor-grid-item">
+						<div class="elementor-share-btn elementor-share-btn_linkedin">
+															<span class="elementor-share-btn__icon">
+								<i class="fab fa-linkedin" aria-hidden="true"></i>								<span class="elementor-screen-only">Share on linkedin</span>
+							</span>
+																				</div>
+					</div>
+									<div class="elementor-grid-item">
+						<div class="elementor-share-btn elementor-share-btn_email">
+															<span class="elementor-share-btn__icon">
+								<i class="fas fa-envelope" aria-hidden="true"></i>								<span class="elementor-screen-only">Share on email</span>
+							</span>
+																				</div>
+					</div>
+						</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-e80aa08" data-id="e80aa08" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+				<!-- hidden widget -->				</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<div class="elementor-element elementor-element-a6fbfd7 elementor-widget elementor-widget-theme-post-content" data-id="a6fbfd7" data-element_type="widget" data-widget_type="theme-post-content.default">
+				<div class="elementor-widget-container" data-read-aloud-multi-block="true">
+			
+<p class="has-drop-cap" data-speechify-sentence="">The installation of Arch has been and continues to be a rite-of-passage within the Linux community. Although there are many guides that discuss the steps needed to install Arch Linux, I couldn’t resist writing my very own guide. This guide promises to be different by being a narrative-style approach to the topic. The goals of this guide are to be educational, informative, and to make &amp; keep it simple (in the spirit of the Arch philosophy). The guide assumes that you have some proficiency with the command line and have a basic understanding of Linux. I hope that this guide can help you succeed with this rite and put you in control of a system that you have built from the ground-up.</p>
+
+
+
+<p data-speechify-sentence="">As an Arch user, the <a href="https://wiki.archlinux.org/" target="_blank" rel="noreferrer noopener">Arch Wiki</a> will be an extremely valuable resource to you. This resource is so well-composed and maintained that even non-Arch users glean knowledge, wisdom, and solutions from it daily.</p>
+
+
+
+<p data-speechify-sentence="">And now, may the adventure begin…</p>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#download-the-arch-iso"></a>Download the Arch ISO</h2>
+
+
+
+<p data-speechify-sentence="">The first thing that we need to do is to obtain an image of Arch Linux. To do so, let’s visit the the Arch Linux <a href="https://www.archlinux.org/download" target="_blank" rel="noreferrer noopener">download page</a> to download the ISO image file.</p>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#boot-the-system-to-the-arch-iso"></a>Boot the System to the Arch ISO</h2>
+
+
+
+<p data-speechify-sentence="">Depending upon the type of system that Arch will be installed on, there are different methods of booting the Arch ISO.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#physical-machine"></a>Physical Machine</h3>
+
+
+
+<p data-speechify-sentence="">For physical machines, a bootable medium can be created from the Arch ISO file.</p>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#prepare-live-bootable-usb"></a>Prepare Live Bootable USB</h4>
+
+
+
+<p data-speechify-sentence="">Although an optical disk could have been used to create a bootable physical medium, USB was chosen due to its relevance. There are many ways to prepare a live USB, one of them is via the <code><strong><em>dd</em></strong></code> command. It is worth noting that <strong>you should be very cautious</strong> when using the dd command since it can overwrite running disks. There are other options as well such as SUSE Image Writer, Fedora Image Writer, Mint Stick and others. The scope of this guide won’t be able to provide a guide for each writer tool so we’ll stick with dd for this guide. Remember, be careful with dd since it is nicknamed “disk destroyer” for a reason.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code># dd if=/location/of/iso/file of=/device/entry/of/usb/drive</code></pre>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#boot-to-usb"></a>Boot to USB</h4>
+
+
+
+<p data-speechify-sentence="">Insert the USB drive into the physical machine and boot into the USB drive. BIOS settings/boot order may need to be adjusted to ensure that the physical machine boots from the USB drive.</p>
+
+
+
+<h4 data-speechify-sentence="">Confirm You are In</h4>
+
+
+
+<p data-speechify-sentence="">Once you have properly booted into the Arch ISO, a prompt similar to the one below will be displayed.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ #</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#virtual-machine"></a>Virtual Machine</h3>
+
+
+
+<p data-speechify-sentence="">Virtual machines do not require a physical medium to be created. The Arch ISO file can be mounted as a virtualized optical disk within the virtualized optical drive.</p>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#confirm-you-are-in-1"></a>Confirm You are In</h4>
+
+
+
+<p data-speechify-sentence="">Once you have properly booted into the Arch ISO, a prompt similar to the one below will be displayed.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ #</code></pre>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#verify-connectivity-to-the-internet"></a>Verify Connectivity to the Internet</h2>
+
+
+
+<p data-speechify-sentence="">During the installation, I prefer to have a wired connection to the Internet. This guide has been written based on a machine that is connected to the Internet using a wired connection.</p>
+
+
+
+<p data-speechify-sentence="">To check Internet connectivity, simply ping a website as shown in the example below.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # ping -c 4 archlinux.org
+PING archlinux.org (95.217.163.246) 56(84) bytes of data.
+64 bytes from archlinux.org (95.217.163.246): icmp_seq=1 ttl=47 time=206 ms
+64 bytes from archlinux.org (95.217.163.246): icmp_seq=2 ttl=47 time=181 ms
+64 bytes from archlinux.org (95.217.163.246): icmp_seq=3 ttl=47 time=181 ms
+64 bytes from archlinux.org (95.217.163.246): icmp_seq=4 ttl=47 time=181 ms
+
+--- archlinux.org ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3003ms
+rtt min/avg/max/mdev = 180.629/187.159/205.907/10.828 ms</code></pre>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#update-the-system-clock"></a>Update the System Clock</h2>
+
+
+
+<p data-speechify-sentence="">Now that we have confirmed connectivity to the Internet, we can leverage NTP. Use <code>timedatectl</code> command to ensure the system clock is accurate by enabling NTP.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # timedatectl set-ntp true
+Starting Network Time Synchronization...
+[  OK  ] Started Network Time Synchronization.
+[  OK  ] Reached target System Time Set.
+[  OK  ] Reached target System Time Synchronized.</code></pre>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#disk-partitioning"></a>Disk Partitioning</h2>
+
+
+
+<p data-speechify-sentence="">In order for us to have a working distribution, we have to create some partitions on the target hard disk so that we can properly install and run Arch Linux. There are numerous tools and commands that can be used for disk partitioning. This guide uses <code>fdisk</code> to create the partitions.</p>
+
+
+
+<p data-speechify-sentence="">The recommended partition schemes vary depending on whether or not the system has UEFI mode enabled.</p>
+
+
+
+<p data-speechify-sentence="">So, let’s verify if UEFI mode is enabled by checking for the existence of this directory:</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # ls /sys/firmware/efi/efivars
+ls: cannot access '/sys/firmware/efi/efivars': No such file or directory
+</code></pre>
+
+
+
+<p data-speechify-sentence="">Based on the output of the command above, we can determine that the system being used in this guide does <strong>not</strong> have UEFI.</p>
+
+
+
+<p data-speechify-sentence="">Now, we can list all existing disk and disk partitions. For the purposes of this guide and for a simpler installation, a virtual machine has been created with a blank 20GB hard disk identified by <code>/dev/sda</code>.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # fdisk -l
+Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop0: 566.52 MiB, 594034688 bytes, 1160224 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+</code></pre>
+
+
+
+<p data-speechify-sentence="">Let’s begin the partitioning process on the <code>/dev/sda</code> hard disk.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # fdisk /dev/sda
+
+Welcome to the fdisk (util-linux 2.36.1).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table.
+Created a new DOS disklabel with disk identifier 0xa1936afe.
+
+Command (m for help):
+</code></pre>
+
+
+
+<p data-speechify-sentence="">If you would like to see all <code>fdisk</code> commands, this is an ideal opporunity to press the <code>m</code> key and <code>Enter</code> to display a list of all commands. You could do that for your information (FYI). However, this guide will walk you through the commands that are needed to partition the disk.</p>
+
+
+
+<p data-speechify-sentence="">Before we create any partitions, let’s review the recommended partition schemes.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#recommended-partition-schemes"></a>Recommended Partition Schemes</h3>
+
+
+
+<p data-speechify-sentence="">The schemes below are mere recommendations and can be altered to your liking. Notably, there are many viewpoints on the size of a swap partition, so take these recommendations with a grain of salt and do what suits you best. After all, that’s the beauty of creating your very own system from the ground-up.</p>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#non-uefi"></a>NON-UEFI</h4>
+
+
+
+<figure class="wp-block-table" data-speechify-sentence=""><table><thead><tr><th>Mount Point</th><th>Partition</th><th>Partition Type</th><th>Partition Size</th><th>File System</th></tr></thead><tbody><tr><td>/mnt</td><td>/dev/sda1</td><td>Linux</td><td>Remainder of the device</td><td>ext4</td></tr><tr><td>[SWAP]</td><td>/dev/sda2</td><td>Linux swap</td><td>More than 512 MiB</td><td>ext4</td></tr></tbody></table></figure>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#uefi"></a>UEFI</h4>
+
+
+
+<figure class="wp-block-table" data-speechify-sentence=""><table><thead><tr><th>Mount Point</th><th>Partition</th><th>Partition Type</th><th>Partition Size</th><th>File System</th></tr></thead><tbody><tr><td>/mnt/boot or mnt/efi</td><td>/dev/sda1</td><td>EFI System Partition</td><td>260MB – 512MB</td><td>fat32</td></tr><tr><td>/mnt</td><td>/dev/sda2</td><td>Linux x86-64 root (/)</td><td>Remainder of the device</td><td>ext4</td></tr><tr><td>[SWAP]</td><td>/dev/sda3</td><td>Linux swap</td><td>More than 512MiB</td><td>ext4</td></tr></tbody></table></figure>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#create-the-partitions"></a>Create the Partitions</h3>
+
+
+
+<p data-speechify-sentence="">Since we have a non-UEFI system, it makes sense to follow the NON-UEFI partition scheme above. This means that we will create 2 partitions: a swap partition (Linux swap) and a partition where root will be mounted (Linux).</p>
+
+
+
+<p data-speechify-sentence="">We have a hard drive that is approximately 20GB in size, so we can easily spare approximately half of a gigabyte (512MB) for the Linux swap partition (<code>/dev/sda2</code>). Leaving us with approximately 19.5GB for the Linux partition (<code>/dev/sda1</code>).</p>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#linux-partition"></a>Linux Partition</h4>
+
+
+
+<p data-speechify-sentence="">First, let’s create the Linux partition (<code>/dev/sda1/</code>).</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>Command (m for help): n
+
+Partition type
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended (container for logical partitions)
+Select (default p): p   
+
+Partition number (1-4, default 1): 1
+
+First sector (2048-41943039, default 2048): 2048
+
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-41943049, default 41943039): +19.5G
+
+Created a new partition of type 'Linux' and of size 19.5 GiB.</code></pre>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#swap-partition"></a>Swap Partition</h4>
+
+
+
+<p data-speechify-sentence="">Next, let’s go ahead and create the Linux swap partition (<code>/dev/sda2/</code>).</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>Command (m for help): n
+
+Partition type
+   p   primary (1 primary, 0 extended, 3 free)
+   e   extended (container for logical partitions)
+Select (default p): p   
+
+Partition number (2-4, default 2): 2
+
+First sector (40896512-41943039, default 40896512): 40896512
+
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (40896512-41943039, default 41943039): 41943039
+
+Created a new partition 2 of type 'Linux' and of size 511 MiB.</code></pre>
+
+
+
+<p data-speechify-sentence="">With the Linux swap partition, we need to change the partition type so that it is a true swap partition.</p>
+
+
+
+<p data-speechify-sentence="">If you would like to see all partition types, this is an ideal opporunity to press the <code>l</code> key and <code>Enter</code> to display a list of all partition types. You could do that for your information (FYI). However, this guide will walk you through the commands that are needed to partition the disk.</p>
+
+
+
+<p data-speechify-sentence="">We now need to change the partition type of our intended Linux swap partition (<code>/dev/sda2</code>).</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>Command (m for help): t
+
+Partition number (1,2, default 2): 2
+
+Hex code or alias (type L to list all): 82
+
+Changed type of partition 'Linux' to 'Linux swap / Solaris'.</code></pre>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#verify-proposed-partition-table"></a>Verify Proposed Partition Table</h4>
+
+
+
+<p data-speechify-sentence="">Before we save our changes and commit them to the disk, let’s take a moment to verify that everything was done correctly.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>Command (m for help): p
+Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xc12ff6e9
+
+Device     Boot    Start      End  Sectors  Size Id Type
+/dev/sda1           2048 40896511 40894464 19.5G 83 Linux
+/dev/sda2       40896512 41943039  1046528  511M 82 Linux swap / Solaris</code></pre>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#write-partition-table-to-disk"></a>Write Partition Table to Disk</h4>
+
+
+
+<p data-speechify-sentence="">Finally, let’s write the newly created partition table to the disk and exit the <code>fdisk</code> utility.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+root@archiso ~ #</code></pre>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#create-file-system"></a>Create File System</h2>
+
+
+
+<p data-speechify-sentence="">The creation of the partitions in the previous steps simply drew boundaries on the storage space offered by the hard disk and specified the type of space betweeen each boundry line. In order for these partitions to be of any use, they should be initialized with a file system and have the swap partition enabled.</p>
+
+
+
+<p data-speechify-sentence="">Again depending on the type of system (UEFI, non-UEFI), the process will vary.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#non-uefi-1"></a>NON-UEFI</h3>
+
+
+
+<p data-speechify-sentence="">For our non-UEFI system, let’s create an ext4 file system on the root partition (you may choose any other viable file system).</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # mkfs.ext4 /dev/sda1
+mke2fs 1.45.6 (20-Mar-2020)
+Creating filesystem with 5111808 4k blocks and 1277952 inodes
+Filesystem UUID: ca970c3e-5a47-468c-8ff7-6ba9dda277af
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 4096000
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (32768 blocks): done
+Writing superblocks and filesystem accounting information: done</code></pre>
+
+
+
+<p data-speechify-sentence="">Also, let’s prepare the swap partition.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # mkswap /dev/sda2
+Setting up swapspace version 1, size = 511 MiB (535818240 bytes)
+no label, UUID=12e273d1-4dc4-4151-9ffe-6a09ae78be38
+
+root@archiso ~ # swapon /dev/sda2</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#uefi-1"></a>UEFI</h3>
+
+
+
+<p data-speechify-sentence="">For the EFI partition type, create a FAT32 file system.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code># mkfs.fat -F32 /dev/sda1</code></pre>
+
+
+
+<p data-speechify-sentence="">For the root partition, create an ext4 file system (or any other viable file system of your choice).</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code># mkfs.ext4 /dev/sda2</code></pre>
+
+
+
+<p data-speechify-sentence="">Prepare the swap partition:</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code># mkswap /dev/sda3
+# swapon /dev/sda3</code></pre>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#optimize-mirrors"></a>Optimize Mirrors</h2>
+
+
+
+<p data-speechify-sentence="">Much like any other distro, Arch Linux relies on mirrors to obtain updates. There are a plethora of mirrors that are hosted on hundreds of servers spanning the entire globe. Usually, the mirrors which are geographically nearer in distance should provide for the fastest connection speeds.</p>
+
+
+
+<p data-speechify-sentence="">Arch Linux comes with a file known as the “mirrorlist” which contains all known mirrors. However, this file is not optimized since it contains every single mirror. We could manually go through this file and edit it, but that would take quite some time. Luckily, there is a tool (Python script) called <code>reflector</code> that has been created that will automatically optimize the file for us. We just need to provide some input.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#sync-the-pacman-repository"></a>Sync the pacman Repository</h3>
+
+
+
+<p data-speechify-sentence="">Before we go about downloading any applications/tools, we should update the repository and ensure that we have the latest and greatest available to us.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # pacman -Syy
+:: Synchronizing package databases...
+ core                            132.8 KiB  5.64 MiB/s 00:00 [#################################] 100%
+ extra                          1633.0 KiB  10.4 MiB/s 00:00 [#################################] 100%
+ community                         5.3 MiB  8.91 MiB/s 00:00 [#################################] 100%</code></pre>
+
+
+
+<h3><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#install-reflector"></a></h3>
+
+
+
+<h3 data-speechify-sentence="">Install reflector</h3>
+
+
+
+<p data-speechify-sentence="">With a fully-updated repository, we are in good-standing to install the <code>reflector</code> tool so that we can optimize the <code>/etc/pacman.d/mirrorlist</code> file for local mirrors.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # pacman -S reflector
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (1) reflector-2021-1
+
+Total Download Size:   0.03 MiB
+Total Installed Size:  0.10 MiB
+Net Upgrade Size:      0.01 MiB
+
+:: Proceed with installation? [Y/n] Y
+:: Retrieving packages...
+ reflector-2021-1-any             25.9 KiB 0.00   B/s 00:00 [#################################] 100%
+(1/1) checking keys in keyring                              [#################################] 100%
+(1/1) checking package integrity                            [#################################] 100%
+(1/1) loading package files                                 [#################################] 100%
+(1/1) checking for file conflicts                           [#################################] 100%
+(1/1) checking available disk space                         [#################################] 100%
+:: Processing package changes...
+(1/1) upgrading reflector                                   [#################################] 100%
+:: Running post-transaction hooks...
+(1/2) Reloading system manager configuration...
+(2/2) Arming ConditionNeedsUpdate... </code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#back-up-existing-mirrorlist-file"></a>Back up Existing Mirrorlist File</h3>
+
+
+
+<p data-speechify-sentence="">It doesn’t hurt to make a backup of a file that is going to be changed. Let’s make a backup of the <code>/etc/pacman.d/mirrorlist</code> file.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#run-reflector-against-the-mirrorlist-file"></a>Run reflector Against the Mirrorlist File</h3>
+
+
+
+<p data-speechify-sentence="">Execute the <code>reflector</code> command to optimize the <code>/etc/pacman.d/mirrorlist</code> file. The end result will be a leaner file which contains the most optimal entries. Since I am in the United States, I have used “US” as the country code within the command.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist</code></pre>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#install-arch-linux"></a>Install Arch Linux</h2>
+
+
+
+<p data-speechify-sentence="">Our system has now been prepared and optimized to take on the install of Arch Linux. This phase involves mounting the Linux partition and installing desired packages using the <code>pacstrap</code> command on to the mounted Linux partition.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#mount-the-linux-partition"></a>Mount the Linux Partition</h3>
+
+
+
+<p data-speechify-sentence="">We must mount the root directory before we can perform any installation.</p>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#non-uefi-2"></a>NON-UEFI</h4>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # mount /dev/sda1 /mnt</code></pre>
+
+
+
+<h4 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#uefi-2"></a>UEFI</h4>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # mount /dev/sda2 /mnt</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#perform-the-installation"></a>Perform the Installation</h3>
+
+
+
+<p data-speechify-sentence="">Use the <code>pacstrap</code> command to install Arch Linux, required packages, and any additional packages (in this case, the nano text editor) to the mounted Linux partition. Additional packages can always be installed later; the installation of <code>nano</code> as an additional package was included to demonstrate the ability of the <code>pacstrap</code> command (and to promote nano as my favorite text editor which will come in handy later in this guide).</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # pacstrap /mnt base linux linux-firmware nano</code></pre>
+
+
+
+<p data-speechify-sentence="">After issuing the command above, the screen will be very busy with the installation of multiple packages which comprise the Arch Linux distribution. Once complete, we can now say that we have installed Arch Linux! But, there’s still more to do: configuration, bootloader installation, and selecting a desktop environment.</p>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#configure-the-installed-arch-system"></a>Configure the Installed Arch System</h2>
+
+
+
+<p data-speechify-sentence="">During the configuration phase, we will start things off by setting the root partition to mount automatically. Then, we will set the timezone so that it reflects the current/local timezone. Next, we will set the locale so that dates, times, numbers, etc. are formatted correctly based on the geographical locale of the machine. Also, we can take this opportunity to make some minor network configurations so that this machine has a proper and accurate identity on the network. Finally, we can enhance the security of the machine by setting a password for the root user.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#automating-the-mounts"></a>Automating the Mounts</h3>
+
+
+
+<p data-speechify-sentence="">Let’s create the <code>/etc/fstab</code> so that the root partition is mounted automatically when the system is booted. The <code>/etc/fstab</code> file can be edited manually, but our goal is to simplify the installation of Arch Linux. Similar to what we did with the <code>reflector</code> tool to automate the optimal mirror selection process, we will introduce and use yet another tool to create the <code>/etc/fstab</code> file.</p>
+
+
+
+<p data-speechify-sentence="">We can automatically generate the fstab file using the <code>genfstab</code> command.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#change-root"></a>Change Root</h3>
+
+
+
+<p data-speechify-sentence="">Recall that we initially booted into this machine using an image file. We are still in the root directory of the image file and our session is in RAM. Now that we have installed Arch Linux, we need to switch to the physically installed root partition using the <code>arch-chroot</code> command.</p>
+
+
+
+<p data-speechify-sentence="">Change root to the root directory at <code>/mnt</code>.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # arch-chroot /mnt</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#setting-the-timezone"></a>Setting the Timezone</h3>
+
+
+
+<p data-speechify-sentence="">At the beginning of this guide, we were able to set NTP to true. This ensured that we had the correct time, but did not ensure that we had the correct timezone. In this step, we will apply the correct timezone (UTC offset) so that the time represented in our installation is relevant to the geographical location.</p>
+
+
+
+<p data-speechify-sentence="">Use the <code>timedatectl</code> command to find your timezone. You can use the <code>arrow</code> keys and the <code>PgUp</code> and <code>PgDn</code> keys to navigate through the list. Once complete press <code>q</code> to exit the list.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# timedatectl list-timezones</code></pre>
+
+
+
+<p data-speechify-sentence="">Create a symbollic link to set the timezone (replace “America/Los_Angeles” with your timezone).</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime</code></pre>
+
+
+
+<p data-speechify-sentence="">Run <code>hwclock</code> to generate <code>/etc/adjtime</code>.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# hwclock --systohc</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#setting-up-locale"></a>Setting Up Locale</h3>
+
+
+
+<p data-speechify-sentence="">The term “locale” refers to language, number, date and currency formats The file <code>/etc/locale.gen</code> contains locale settings and system languages and is commented by default. We must open this file using a text editor and uncomment the line which contains the desired locale. This is why <code>nano</code> was installed previously using the <code>pacstrap</code> command.</p>
+
+
+
+<p data-speechify-sentence="">Open the <code>/etc/locale.gen</code> file and remove the “#” from the start of the line which contains your locale. Then, save the file.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# nano /etc/locale.gen</code></pre>
+
+
+
+<p data-speechify-sentence="">Since I am in the United States, the following entry has been uncommented prior to saving the file and the locale of <code>en_US.UTF-8</code> will be used for the remainder of the steps.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code># /etc/locale.gen
+
+en_US.UTF-8 UTF-8 </code></pre>
+
+
+
+<p data-speechify-sentence="">Generate the <code>/etc/locale.conf</code> file.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# locale-gen
+Generating locales...
+  en_US.UTF-8... done
+Generation complete.</code></pre>
+
+
+
+<p data-speechify-sentence="">Create and set the <code>LANG</code> variable.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# echo LANG=en_US.UTF-8 &gt; /etc/locale.conf
+[root@archiso /]# export LANG=en_US.UTF-8 </code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#network-configuration"></a>Network Configuration</h3>
+
+
+
+<p data-speechify-sentence="">Let’s use that text editor once more to give our machine a hostname and proper identity on the network.</p>
+
+
+
+<p data-speechify-sentence="">Create the <code>/etc/hostname</code> file and add the hostname entry. Then, save the file.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# nano /etc/hostname</code></pre>
+
+
+
+<p data-speechify-sentence="">This entry has been added:</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code># /etc/hostname
+
+ArchLinuxPC</code></pre>
+
+
+
+<p data-speechify-sentence="">Create the /etc/hosts file and add the proper entries. Then, save the file.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# nano /etc/hosts</code></pre>
+
+
+
+<p data-speechify-sentence="">These entries have been added:</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code># /etc/hosts
+
+127.0.0.1 localhost
+::1 localhost
+127.0.1.1 ArchLinuxPC</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#root-password"></a>Root Password</h3>
+
+
+
+<p data-speechify-sentence="">Finally, let’s give the root user a password for the sake of security.</p>
+
+
+
+<p data-speechify-sentence="">Use the <code>passwd</code> command to set the password for root.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# passwd
+New password:
+Retype new password:
+passwd: password updated successfully</code></pre>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#install-grand-unified-bootloader-grub"></a>Install Grand Unified Bootloader (GRUB)</h2>
+
+
+
+<p data-speechify-sentence="">Up to this point, we have created a functional Arch Linux system. It has been installed on the root partition, but a bootloader is needed to properly and automatically load our newly installed system. There are a few choices when it comes to bootloaders. I have chosen to use GRUB as the bootloader of choice for this guide.</p>
+
+
+
+<p data-speechify-sentence="">Once again, we have two general methods of installing a bootloader: the UEFI and non-UEFI methods.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#non-uefi-3"></a>NON-UEFI</h3>
+
+
+
+<p data-speechify-sentence="">For our non-UEFI system, the process is shown below.</p>
+
+
+
+<p data-speechify-sentence="">Install the <code>grub</code> package.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S grub
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (1) grub-2:2.04-8
+
+Total Download Size:    6.74 MiB
+Total Installed Size:  32.91 MiB
+
+:: Proceed with installation? [Y/n] Y
+:: Retrieving packages...
+ grub-2:2.04-8-x86_64              6.7 MiB 6.97 MiB/s 00:01 [#################################] 100%
+(1/1) checking keys in keyring                              [#################################] 100%
+(1/1) checking package integrity                            [#################################] 100%
+(1/1) loading package files                                 [#################################] 100%
+(1/1) checking for file conflicts                           [#################################] 100%
+(1/1) checking available disk space                         [#################################] 100%
+:: Processing package changes...
+(1/1) installing grub                                       [#################################] 100%
+Generate your bootloader configuration with:
+  grub-mkconfig -o /boot/grub/grub.cfg
+Optional dependencies for grub
+    freetype2: For grub-mkfont usage
+    fuse2: For grub-mount usage
+    dosfstools: For grub-mkrescue FAT FS and EFI support
+    efibootmgr: For grub-install EFI support   
+    libisoburn: Provides xorriso for generating grub rescue iso using grub-mkrescue
+    os-prober: To detect other OSes when generating grub.cfg in BIOS systems
+    mtools: For grub-mkrescue FAT FS support
+:: Running post-transaction hooks...
+(1/1) Arming ConditionNeedsUpdate... </code></pre>
+
+
+
+<p data-speechify-sentence="">Install GRUB to the hard disk.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# grub-install /dev/sda
+Installing for i386-pc platform.
+Installation finished. No error reported.</code></pre>
+
+
+
+<p data-speechify-sentence="">Finally, generate the <code>/boot/grub/grub.cfg</code> file.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# grub-mkconfig -o /boot/grub/grub.cfg
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-linux
+Found initrd image: /boot/initramfs-linux.img
+Found fallback initrd image(s) in /boot: initramfs-linux-fallback.img
+done</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#uefi-3"></a>UEFI</h3>
+
+
+
+<p data-speechify-sentence="">Install the <code>grub</code> package.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S grub efibootmgr</code></pre>
+
+
+
+<p data-speechify-sentence="">Create the directory where EFI partition will be mounted.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# mkdir /boot/efi</code></pre>
+
+
+
+<p data-speechify-sentence="">Mount the ESP partition.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# mount /dev/sda1 /boot/efi</code></pre>
+
+
+
+<p data-speechify-sentence="">Install GRUB to the hard disk.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi</code></pre>
+
+
+
+<p data-speechify-sentence="">Finally, generate the <code>/boot/grub/grub.cfg</code> file.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# grub-mkconfig -o /boot/grub/grub.cfg</code></pre>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#create-a-user-account"></a>Create a User Account</h2>
+
+
+
+<p data-speechify-sentence="">This is an excellent opportunity to create a user account. A non-root account is a preferred method of logging into the graphical desktop environment which will be install in the next section. The method of creation for the user account will automatically create the home directory for the user as well. In addition, we can give this account sudo privileges. For that, we will also need to install the <code>sudo</code> command, itself.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#add-user-and-home-directory"></a>Add User and Home Directory</h3>
+
+
+
+<p data-speechify-sentence="">Use the <code>useradd</code> command with the <code>-m</code> option to create a new user and to generate the home directory for the new user.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# useradd -m deep</code></pre>
+
+
+
+<h3><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#user-password"></a></h3>
+
+
+
+<h3 data-speechify-sentence="">User Password</h3>
+
+
+
+<p data-speechify-sentence="">Set up user password.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# passwd deep
+New password:
+Retype new password:
+passwd: password updated successfully</code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#install-sudo"></a>Install sudo</h3>
+
+
+
+<p data-speechify-sentence="">Install the <code>sudo</code> command.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S sudo
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (1) sudo-1.9.5.p2-1
+
+Total Download Size:    1.09 MiB
+Total Installed Size:   4.45 MiB
+
+:: Proceed with installation? [Y/n] Y
+:: Retrieving packages...
+ sudo-1.9.5.p2-1-x86_64         1116.4 KiB 15.6 MiB/s 00:01 [#################################] 100%
+(1/1) checking keys in keyring                              [#################################] 100%
+(1/1) checking package integrity                            [#################################] 100%
+(1/1) loading package files                                 [#################################] 100%
+(1/1) checking for file conflicts                           [#################################] 100%
+(1/1) checking available disk space                         [#################################] 100%
+:: Processing package changes...
+(1/1) installing sudo                                       [#################################] 100%
+:: Running post-transaction hooks...
+(1/3) Reloading system manager configuration...
+Running in chroot, ignoring command 'daemon-reload'
+(2/3) Creating temporary files...
+(3/3) Arming ConditionNeedsUpdate... </code></pre>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#give-user-sudo-privileges"></a>Give User sudo Privileges</h3>
+
+
+
+<p data-speechify-sentence=""><em><strong>NOTE:</strong> The configuration file for <code>sudo</code> is <code>/etc/sudoers</code>. This file should always be edited with the <code>visudo</code> command. The <code>visudo</code> command locks the “sudoers” file, saves edits to a temporary file, and then checks the file’s syntax before copying it to <code>/etc/sudoers</code>.)</em></p>
+
+
+
+<p data-speechify-sentence="">Set an editor for use when launching <code>visudo</code>.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# EDITOR=nano visudo</code></pre>
+
+
+
+<p data-speechify-sentence="">Add the following line for the newly created user. Then, save the file.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code># /etc/sudoers
+
+deep ALL=(ALL) ALL</code></pre>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#install-a-desktop-environment"></a>Install a Desktop Environment</h2>
+
+
+
+<p data-speechify-sentence="">If you thought swap partition sizes and text editors were controversial, they don’t compare to the tribalism that exists for desktop environments. But that’s what makes Linux amazing: the freedom to choose. There are many desktop environments that can be used with Arch Linux. My favorite desktop environments have been included below (in no particular order).</p>
+
+
+
+<p data-speechify-sentence="">Choose your desktop environment, perform the installation, and finalize the configuration. If you are unsure about the options presented during the installation of your desktop environment of choice, choose the defaulted options. Then, let’s reconnect in the Summary section of this tutorial.</p>
+
+
+
+<p data-speechify-sentence=""><em><strong>NOTE:</strong> KDE doesn’t allow the root user to login directly. You must initially login with the user account created in the previous section.</em></p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#gnome"></a>GNOME</h3>
+
+
+
+<p data-speechify-sentence="">Install the Xorg display server.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S xorg</code></pre>
+
+
+
+<p data-speechify-sentence="">Install the GNOME desktop environment.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S gnome</code></pre>
+
+
+
+<p data-speechify-sentence="">Enable the GDM display manager and Network Manager.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# systemctl enable gdm.service
+[root@archiso /]# systemctl enable NetworkManager.service</code></pre>
+
+
+
+<p data-speechify-sentence="">Exit from chroot.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# exit</code></pre>
+
+
+
+<p data-speechify-sentence="">Shutdown.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # shutdown now</code></pre>
+
+
+
+<p data-speechify-sentence="">Remove the live USB/medium and power back on.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#cinnamon"></a>CINNAMON</h3>
+
+
+
+<p data-speechify-sentence="">Install the Xorg display server.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S xorg</code></pre>
+
+
+
+<p data-speechify-sentence="">Install the Xorg terminal.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S xterm</code></pre>
+
+
+
+<p data-speechify-sentence="">Install the Cinnamon desktop environment.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S cinnamon</code></pre>
+
+
+
+<p data-speechify-sentence="">Install the GDM display manager.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S gdm</code></pre>
+
+
+
+<p data-speechify-sentence="">Enable the GDM display manager and Network Manager.</p>
+
+
+
+<p data-speechify-sentence=""><em><strong>NOTE:</strong> During the login process, look for a settings (gear) icon. This icon will allow you to choose the Cinammon desktop environment.</em></p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# systemctl enable gdm.service
+[root@archiso /]# systemctl enable NetworkManager.service</code></pre>
+
+
+
+<p data-speechify-sentence="">Exit from chroot.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# exit</code></pre>
+
+
+
+<p data-speechify-sentence="">Shutdown.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # shutdown now</code></pre>
+
+
+
+<p data-speechify-sentence="">Remove the live USB/medium and power back on.</p>
+
+
+
+<h3 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#kde"></a>KDE</h3>
+
+
+
+<p data-speechify-sentence="">Install the Xorg display server.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S xorg</code></pre>
+
+
+
+<p data-speechify-sentence="">Install <code>plasma</code>, <code>plasma-wayland-session</code>, and <code>kde-applications</code>.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# pacman -S plasma plasma-wayland-session kde-applications </code></pre>
+
+
+
+<p data-speechify-sentence="">Enable the SDDM display manager and Network Manager.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# systemctl enable sddm.service
+[root@archiso /]# systemctl enable NetworkManager.service</code></pre>
+
+
+
+<p data-speechify-sentence="">Exit from chroot.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>[root@archiso /]# exit</code></pre>
+
+
+
+<p data-speechify-sentence="">Shutdown.</p>
+
+
+
+<pre class="wp-block-code" data-speechify-sentence=""><code>root@archiso ~ # shutdown now</code></pre>
+
+
+
+<p data-speechify-sentence="">Remove the live USB/medium and power back on.</p>
+
+
+
+<hr class="wp-block-separator">
+
+
+
+<h2 data-speechify-sentence=""><a href="https://github.com/codeHaiku22/Arch-Linux-Installation-Guide/blob/master/Arch%20Linux%20Installation%20Guide.md#summary"></a>Summary</h2>
+
+
+
+<p data-speechify-sentence="">Congratulations! You now have a working Arch Linux system which you have designed based on your choices and preferences. Arch, by default, is a rolling-release distribution. This means that you shouldn’t have to install it more than once for any system. One of the benefits (and drawbacks) of being a rolling release like Arch, is that you are always on the cutting edge (and sometimes bleeding edge) of system and software updates which, at times, can be unstable. Arch is an excellent distribution for a personal workstation or development machine. However, you should avoid deploying Arch on critical machines which are intended to run in a production environment. If (or when) you run into trouble, the <a href="https://wiki.archlinux.org/">Arch Wiki</a> will be an excellent source of any further configuration, troubleshooting, or general/specific knowledge about a given topic.</p>
+
+
+
+<p data-speechify-sentence="">This was just the beginning; there is much more to install, configure, tweak, and learn. I hope that you have enjoyed this guide and have gained some insight into the installation of Arch Linux. You can now boast to your friends and colleagues about your distro of choice. Don’t hesitate to sprinkle in the occasional, “By the way, I use Arch” in casual conversations.</p>
+
+
+
+<p data-speechify-sentence="">There’s many more <a href="https://frontpagelinux.com/category/tutorials/">tutorials</a> here on FrontPageLinux and If you’d like more from me then visit <a href="https://frontpagelinux.com/author/deepgrewal/">my author archive</a> to find all of my previous articles / tutorials.</p>
+		</div>
+				</div>
+				<div class="elementor-element elementor-element-210eb56 elementor-align-left elementor-widget elementor-widget-post-info" data-id="210eb56" data-element_type="widget" data-widget_type="post-info.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-inline-items elementor-icon-list-items elementor-post-info">
+					<li class="elementor-icon-list-item elementor-repeater-item-83a7353 elementor-inline-item" itemprop="about">
+										<span class="elementor-icon-list-icon">
+								<i aria-hidden="true" class="fas fa-layer-group"></i>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-terms">
+										<span class="elementor-post-info__terms-list">
+				<a href="https://frontpagelinux.com/category/tutorials/" class="elementor-post-info__terms-list-item">Tutorials</a>				</span>
+					</span>
+								</li>
+				<li class="elementor-icon-list-item elementor-repeater-item-a627809 elementor-inline-item" itemprop="about">
+										<span class="elementor-icon-list-icon">
+								<i aria-hidden="true" class="fas fa-tags"></i>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-terms">
+										<span class="elementor-post-info__terms-list">
+				<a href="https://frontpagelinux.com/tag/arch/" class="elementor-post-info__terms-list-item">Arch</a>, <a href="https://frontpagelinux.com/tag/distros/" class="elementor-post-info__terms-list-item">Distros</a>, <a href="https://frontpagelinux.com/tag/guide/" class="elementor-post-info__terms-list-item">Guide</a>, <a href="https://frontpagelinux.com/tag/tutorial/" class="elementor-post-info__terms-list-item">Tutorial</a>				</span>
+					</span>
+								</li>
+				</ul>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-e031331 elementor-author-box--link-yes elementor-author-box--image-valign-middle elementor-author-box--avatar-yes elementor-author-box--name-yes elementor-author-box--biography-yes elementor-widget elementor-widget-author-box" data-id="e031331" data-element_type="widget" data-widget_type="author-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-author-box">
+							<a href="https://frontpagelinux.com/author/deepgrewal/" class="elementor-author-box__avatar">
+					<img src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/deep-grewal-avatar.png" alt="Deep Grewal">
+				</a>
+			
+			<div class="elementor-author-box__text">
+									<a href="https://frontpagelinux.com/author/deepgrewal/">
+						<h4 class="elementor-author-box__name">Deep Grewal</h4>					</a>
+				
+									<div class="elementor-author-box__bio">
+											</div>
+				
+									<a class="elementor-author-box__button elementor-button elementor-size-xs" href="https://frontpagelinux.com/author/deepgrewal/">
+						All Posts					</a>
+							</div>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-050412a elementor-widget elementor-widget-shortcode" data-id="050412a" data-element_type="widget" data-widget_type="shortcode.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-shortcode"><div class="crp_related crp_related_shortcode  "><h5>Related Posts:</h5><ul><li><a href="https://frontpagelinux.com/tutorials/how-to-install-lineage-os-on-amazon-fire-hd-8-tablet/" class="crp_link post-5469"><figure><img loading="lazy" width="300" height="300" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/wendy-firehd-lineage.jpg" class="crp_thumb crp_featured" alt="How To Install Lineage OS On Amazon Fire HD 8 Tablet" title="How To Install Lineage OS On Amazon Fire HD 8 Tablet" srcset="https://frontpagelinux.com/wp-content/uploads/wendy-firehd-lineage-150x150.jpg 150w, https://frontpagelinux.com/wp-content/uploads/wendy-firehd-lineage-120x120.jpg 120w" sizes="(max-width: 300px) 100vw, 300px"></figure><span class="crp_title">How To Install Lineage OS On Amazon Fire HD 8 Tablet</span></a></li><li><a href="https://frontpagelinux.com/articles/easily-install-jack-audio-with-ubuntu-studio-installer/" class="crp_link post-1694"><figure><img loading="lazy" width="300" height="300" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/ilvipero-ubuntustudio-jack-featured.jpg" class="crp_thumb crp_featured" alt="Easily Install JACK Audio  with Ubuntu Studio Installer" title="Easily Install JACK Audio  with Ubuntu Studio Installer" srcset="https://frontpagelinux.com/wp-content/uploads/ilvipero-ubuntustudio-jack-featured-150x150.jpg 150w, https://frontpagelinux.com/wp-content/uploads/ilvipero-ubuntustudio-jack-featured-120x120.jpg 120w" sizes="(max-width: 300px) 100vw, 300px"></figure><span class="crp_title">Easily Install JACK Audio with Ubuntu Studio Installer</span></a></li><li><a href="https://frontpagelinux.com/news/arch-based-endeavour-os-now-has-arm-images/" class="crp_link post-7463"><figure><img loading="lazy" width="300" height="300" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/endeavouros-arm-front-page-linux.jpg" class="crp_thumb crp_featured" alt="Arch-Based Endeavour OS Now Has ARM Images" title="Arch-Based Endeavour OS Now Has ARM Images"></figure><span class="crp_title">Arch-Based Endeavour OS Now Has ARM Images</span></a></li></ul><div class="crp_clear"></div></div></div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-20df95f elementor-widget elementor-widget-post-comments" data-id="20df95f" data-element_type="widget" data-widget_type="post-comments.theme_comments">
+				<div class="elementor-widget-container">
+			<div class="wpdc-comments-loaded" id="wpdc-comments" data-post-id="8507">		<div id="comments" class="comments-area">
+			<div class="respond comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">
+										Be the first to comment at 								<a class="wpdc-discourse-topic-link" target="_blank" rel="noreferrer noopener" href="https://discourse.destinationlinux.network/t/how-to-install-arch-linux-a-step-by-step-installation-guide/3496">DLNForum.com</a>
+								</h3>
+			</div>
+		</div>
+		</div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-3af313d" data-id="3af313d" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-7f71081 elementor-search-form--skin-classic elementor-search-form--button-type-icon elementor-search-form--icon-search elementor-widget elementor-widget-search-form" data-id="7f71081" data-element_type="widget" data-settings="{&quot;skin&quot;:&quot;classic&quot;}" data-widget_type="search-form.default">
+				<div class="elementor-widget-container">
+					<form class="elementor-search-form" role="search" action="https://frontpagelinux.com/" method="get">
+									<div class="elementor-search-form__container">
+								<input placeholder="Search..." class="elementor-search-form__input" type="search" name="s" title="Search" value="">
+													<button class="elementor-search-form__submit" type="submit" title="Search" aria-label="Search">
+													<i aria-hidden="true" class="fas fa-search"></i>							<span class="elementor-screen-only">Search</span>
+											</button>
+											</div>
+		</form>
+				</div>
+				</div>
+				<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-inner-section elementor-element elementor-element-37e3196 elementor-hidden-phone elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="37e3196" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-d0faaf7" data-id="d0faaf7" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-4a9b80b elementor-widget elementor-widget-heading" data-id="4a9b80b" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<span class="elementor-heading-title elementor-size-default"><a href="https://frontpagelinux.com/category/news">Tags</a></span>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3082d22" data-id="3082d22" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-4b979c2 elementor-widget elementor-widget-spacer" data-id="4b979c2" data-element_type="widget" data-widget_type="spacer.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-spacer">
+			<div class="elementor-spacer-inner"></div>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<div class="elementor-element elementor-element-a6c1abc elementor-hidden-phone elementor-widget elementor-widget-wp-widget-tag_cloud" data-id="a6c1abc" data-element_type="widget" data-widget_type="wp-widget-tag_cloud.default">
+				<div class="elementor-widget-container">
+			<h5>Tags</h5><div class="tagcloud"><a href="https://frontpagelinux.com/tag/amd/" class="tag-cloud-link tag-link-77 tag-link-position-1" style="font-size: 10.975pt;" aria-label="AMD (8 items)">AMD</a>
+<a href="https://frontpagelinux.com/tag/arch/" class="tag-cloud-link tag-link-45 tag-link-position-2" style="font-size: 11.85pt;" aria-label="Arch (9 items)">Arch</a>
+<a href="https://frontpagelinux.com/tag/arm/" class="tag-cloud-link tag-link-104 tag-link-position-3" style="font-size: 10.1pt;" aria-label="ARM (7 items)">ARM</a>
+<a href="https://frontpagelinux.com/tag/audio/" class="tag-cloud-link tag-link-161 tag-link-position-4" style="font-size: 9.225pt;" aria-label="Audio (6 items)">Audio</a>
+<a href="https://frontpagelinux.com/tag/btrfs/" class="tag-cloud-link tag-link-229 tag-link-position-5" style="font-size: 9.225pt;" aria-label="Btrfs (6 items)">Btrfs</a>
+<a href="https://frontpagelinux.com/tag/canonical/" class="tag-cloud-link tag-link-137 tag-link-position-6" style="font-size: 15pt;" aria-label="Canonical (14 items)">Canonical</a>
+<a href="https://frontpagelinux.com/tag/debian/" class="tag-cloud-link tag-link-67 tag-link-position-7" style="font-size: 10.975pt;" aria-label="Debian (8 items)">Debian</a>
+<a href="https://frontpagelinux.com/tag/desktop/" class="tag-cloud-link tag-link-334 tag-link-position-8" style="font-size: 9.225pt;" aria-label="Desktop (6 items)">Desktop</a>
+<a href="https://frontpagelinux.com/tag/desktop-environments/" class="tag-cloud-link tag-link-51 tag-link-position-9" style="font-size: 12.55pt;" aria-label="Desktop Environments (10 items)">Desktop Environments</a>
+<a href="https://frontpagelinux.com/tag/distros/" class="tag-cloud-link tag-link-102 tag-link-position-10" style="font-size: 16.4pt;" aria-label="Distros (17 items)">Distros</a>
+<a href="https://frontpagelinux.com/tag/elementaryos/" class="tag-cloud-link tag-link-58 tag-link-position-11" style="font-size: 10.975pt;" aria-label="elementaryOS (8 items)">elementaryOS</a>
+<a href="https://frontpagelinux.com/tag/endeavouros/" class="tag-cloud-link tag-link-40 tag-link-position-12" style="font-size: 8pt;" aria-label="EndeavourOS (5 items)">EndeavourOS</a>
+<a href="https://frontpagelinux.com/tag/fedora/" class="tag-cloud-link tag-link-62 tag-link-position-13" style="font-size: 15.875pt;" aria-label="Fedora (16 items)">Fedora</a>
+<a href="https://frontpagelinux.com/tag/gnome/" class="tag-cloud-link tag-link-55 tag-link-position-14" style="font-size: 19.375pt;" aria-label="GNOME (26 items)">GNOME</a>
+<a href="https://frontpagelinux.com/tag/hardware/" class="tag-cloud-link tag-link-48 tag-link-position-15" style="font-size: 14.475pt;" aria-label="Hardware (13 items)">Hardware</a>
+<a href="https://frontpagelinux.com/tag/kde/" class="tag-cloud-link tag-link-90 tag-link-position-16" style="font-size: 16.4pt;" aria-label="KDE (17 items)">KDE</a>
+<a href="https://frontpagelinux.com/tag/kde-plasma/" class="tag-cloud-link tag-link-54 tag-link-position-17" style="font-size: 17.1pt;" aria-label="KDE Plasma (19 items)">KDE Plasma</a>
+<a href="https://frontpagelinux.com/tag/kernel/" class="tag-cloud-link tag-link-165 tag-link-position-18" style="font-size: 10.1pt;" aria-label="Kernel (7 items)">Kernel</a>
+<a href="https://frontpagelinux.com/tag/linux/" class="tag-cloud-link tag-link-162 tag-link-position-19" style="font-size: 19.725pt;" aria-label="Linux (27 items)">Linux</a>
+<a href="https://frontpagelinux.com/tag/linux-plusplus/" class="tag-cloud-link tag-link-92 tag-link-position-20" style="font-size: 17.8pt;" aria-label="Linux++ (21 items)">Linux++</a>
+<a href="https://frontpagelinux.com/tag/linux-mint/" class="tag-cloud-link tag-link-60 tag-link-position-21" style="font-size: 11.85pt;" aria-label="Linux Mint (9 items)">Linux Mint</a>
+<a href="https://frontpagelinux.com/tag/manjaro/" class="tag-cloud-link tag-link-61 tag-link-position-22" style="font-size: 15pt;" aria-label="Manjaro (14 items)">Manjaro</a>
+<a href="https://frontpagelinux.com/tag/mx-linux/" class="tag-cloud-link tag-link-64 tag-link-position-23" style="font-size: 8pt;" aria-label="MX Linux (5 items)">MX Linux</a>
+<a href="https://frontpagelinux.com/tag/nitrux/" class="tag-cloud-link tag-link-98 tag-link-position-24" style="font-size: 8pt;" aria-label="Nitrux (5 items)">Nitrux</a>
+<a href="https://frontpagelinux.com/tag/open-source/" class="tag-cloud-link tag-link-144 tag-link-position-25" style="font-size: 11.85pt;" aria-label="Open Source (9 items)">Open Source</a>
+<a href="https://frontpagelinux.com/tag/opensuse/" class="tag-cloud-link tag-link-46 tag-link-position-26" style="font-size: 13.775pt;" aria-label="openSUSE (12 items)">openSUSE</a>
+<a href="https://frontpagelinux.com/tag/pine64/" class="tag-cloud-link tag-link-106 tag-link-position-27" style="font-size: 16.75pt;" aria-label="Pine64 (18 items)">Pine64</a>
+<a href="https://frontpagelinux.com/tag/pinephone/" class="tag-cloud-link tag-link-109 tag-link-position-28" style="font-size: 13.25pt;" aria-label="PinePhone (11 items)">PinePhone</a>
+<a href="https://frontpagelinux.com/tag/podcast/" class="tag-cloud-link tag-link-100 tag-link-position-29" style="font-size: 10.975pt;" aria-label="Podcast (8 items)">Podcast</a>
+<a href="https://frontpagelinux.com/tag/pop-os/" class="tag-cloud-link tag-link-59 tag-link-position-30" style="font-size: 9.225pt;" aria-label="Pop!_OS (6 items)">Pop!_OS</a>
+<a href="https://frontpagelinux.com/tag/red-hat/" class="tag-cloud-link tag-link-63 tag-link-position-31" style="font-size: 16.4pt;" aria-label="Red Hat (17 items)">Red Hat</a>
+<a href="https://frontpagelinux.com/tag/security/" class="tag-cloud-link tag-link-50 tag-link-position-32" style="font-size: 8pt;" aria-label="Security (5 items)">Security</a>
+<a href="https://frontpagelinux.com/tag/solus/" class="tag-cloud-link tag-link-68 tag-link-position-33" style="font-size: 8pt;" aria-label="Solus (5 items)">Solus</a>
+<a href="https://frontpagelinux.com/tag/suse/" class="tag-cloud-link tag-link-96 tag-link-position-34" style="font-size: 13.775pt;" aria-label="SUSE (12 items)">SUSE</a>
+<a href="https://frontpagelinux.com/tag/system76/" class="tag-cloud-link tag-link-93 tag-link-position-35" style="font-size: 14.475pt;" aria-label="System76 (13 items)">System76</a>
+<a href="https://frontpagelinux.com/tag/tutorial/" class="tag-cloud-link tag-link-163 tag-link-position-36" style="font-size: 13.25pt;" aria-label="Tutorial (11 items)">Tutorial</a>
+<a href="https://frontpagelinux.com/tag/tuxedo/" class="tag-cloud-link tag-link-108 tag-link-position-37" style="font-size: 10.975pt;" aria-label="TUXEDO (8 items)">TUXEDO</a>
+<a href="https://frontpagelinux.com/tag/ubports/" class="tag-cloud-link tag-link-110 tag-link-position-38" style="font-size: 9.225pt;" aria-label="UBports (6 items)">UBports</a>
+<a href="https://frontpagelinux.com/tag/ubuntu/" class="tag-cloud-link tag-link-41 tag-link-position-39" style="font-size: 22pt;" aria-label="Ubuntu (37 items)">Ubuntu</a>
+<a href="https://frontpagelinux.com/tag/ubuntu-cinnamon-remix/" class="tag-cloud-link tag-link-140 tag-link-position-40" style="font-size: 9.225pt;" aria-label="Ubuntu Cinnamon Remix (6 items)">Ubuntu Cinnamon Remix</a>
+<a href="https://frontpagelinux.com/tag/ubuntu-flavours/" class="tag-cloud-link tag-link-85 tag-link-position-41" style="font-size: 17.1pt;" aria-label="Ubuntu Flavours (19 items)">Ubuntu Flavours</a>
+<a href="https://frontpagelinux.com/tag/ubuntu-lts/" class="tag-cloud-link tag-link-101 tag-link-position-42" style="font-size: 16.4pt;" aria-label="Ubuntu LTS (17 items)">Ubuntu LTS</a>
+<a href="https://frontpagelinux.com/tag/ubuntu-mate/" class="tag-cloud-link tag-link-43 tag-link-position-43" style="font-size: 9.225pt;" aria-label="Ubuntu MATE (6 items)">Ubuntu MATE</a>
+<a href="https://frontpagelinux.com/tag/unix/" class="tag-cloud-link tag-link-156 tag-link-position-44" style="font-size: 9.225pt;" aria-label="Unix (6 items)">Unix</a>
+<a href="https://frontpagelinux.com/tag/zorin-os/" class="tag-cloud-link tag-link-70 tag-link-position-45" style="font-size: 8pt;" aria-label="Zorin OS (5 items)">Zorin OS</a></div>
+		</div>
+				</div>
+				<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-inner-section elementor-element elementor-element-544f2ca elementor-hidden-phone elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="544f2ca" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-03e5df5" data-id="03e5df5" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-41ac9a7 elementor-widget elementor-widget-heading" data-id="41ac9a7" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h3 class="elementor-heading-title elementor-size-default"><a href="https://frontpagelinux.com/category/news">Social Media</a></h3>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-aa4a3f3" data-id="aa4a3f3" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-a5e29c9 elementor-widget elementor-widget-spacer" data-id="a5e29c9" data-element_type="widget" data-widget_type="spacer.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-spacer">
+			<div class="elementor-spacer-inner"></div>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-inner-section elementor-element elementor-element-974ed9d elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="974ed9d" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-414668f" data-id="414668f" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-405ed11 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="405ed11" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+					<a href="https://discourse.destinationlinux.network/">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-discourse"></i>						</span>
+										<span class="elementor-icon-list-text">DLN Forum</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://destinationlinux.org/telegram">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-telegram-plane"></i>						</span>
+										<span class="elementor-icon-list-text">Telegram</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://destinationlinux.network/mumble">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-headphones"></i>						</span>
+										<span class="elementor-icon-list-text">Mumble</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://destinationlinux.org/discord">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-discord"></i>						</span>
+										<span class="elementor-icon-list-text">Discord</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://steamcommunity.com/groups/DestinationLinux">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-steam"></i>						</span>
+										<span class="elementor-icon-list-text">Steam</span>
+											</a>
+									</li>
+						</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-827d873" data-id="827d873" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-b95f184 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="b95f184" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+					<a href="https://twitter.com/DestLinuxPod">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-twitter"></i>						</span>
+										<span class="elementor-icon-list-text">Twitter</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://linuxrocks.online/@DestinationLinux">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-mastodon"></i>						</span>
+										<span class="elementor-icon-list-text">Mastodon</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://diasp.org/people/ed9a63a0864701361256047d7b62795e">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-diaspora"></i>						</span>
+										<span class="elementor-icon-list-text">Diaspora</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://www.instagram.com/destinationlinux/">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-instagram"></i>						</span>
+										<span class="elementor-icon-list-text">Instagram</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://www.facebook.com/destinationlinux/">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-facebook"></i>						</span>
+										<span class="elementor-icon-list-text">Facebook</span>
+											</a>
+									</li>
+						</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-inner-section elementor-element elementor-element-adf7033 elementor-hidden-phone elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="adf7033" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-56a78aa" data-id="56a78aa" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-49d4ecc elementor-widget elementor-widget-heading" data-id="49d4ecc" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h3 class="elementor-heading-title elementor-size-default" data-speechify-sentence="">Tweets</h3>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2dfdb74" data-id="2dfdb74" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-4bb9adc elementor-widget elementor-widget-spacer" data-id="4bb9adc" data-element_type="widget" data-widget_type="spacer.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-spacer">
+			<div class="elementor-spacer-inner"></div>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<div class="elementor-element elementor-element-85399e7 elementor-widget elementor-widget-eael-twitter-feed" data-id="85399e7" data-element_type="widget" data-widget_type="eael-twitter-feed.default">
+				<div class="elementor-widget-container">
+			<div class="eael-twitter-feed eael-twitter-feed-85399e7 eael-twitter-feed-list eael-twitter-feed- clearfix" data-gutter="10">
+			<div class="eael-twitter-feed-item ">
+				<div class="eael-twitter-feed-item-inner">
+				    <div class="eael-twitter-feed-item-header clearfix"><a class="eael-twitter-feed-item-meta" href="https://twitter.com/@frontpagelinux" target="_blank"><i class="fab fa-twitter eael-twitter-feed-item-icon"></i><span class="eael-twitter-feed-item-author">FrontPageLinux</span>
+                        </a><span class="eael-twitter-feed-item-date">4 weeks ago</span></div>
+
+                    <div class="eael-twitter-feed-item-content" data-read-aloud-multi-block="true"><p data-speechify-sentence="">RT @itguyeric: My latest blog post is LIVE out on @FrontPageLinux ! Have you been curious about @ansible or tired of running the same opera…</p><a href="https://twitter.com/FrontPageLinux/status/1409933183618109442" target="_blank" class="read-more-link" data-speechify-sentence="">Read More <i class="fas fa-angle-double-right"></i></a></div>
+                    
+                </div>
+			</div>
+        </div><style>
+            .eael-twitter-feed-85399e7.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
+                width: calc(50% - 5px);
+            }
+            .eael-twitter-feed-85399e7.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item {
+                width: calc(33.33% - 7px);
+            }
+            .eael-twitter-feed-85399e7.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+                width: calc(25% - 8px);
+            }
+
+            .eael-twitter-feed-85399e7.eael-twitter-feed-col-2 .eael-twitter-feed-item,
+            .eael-twitter-feed-85399e7.eael-twitter-feed-col-3 .eael-twitter-feed-item,
+            .eael-twitter-feed-85399e7.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+                margin-bottom: 10px;
+            }
+            @media only screen and (min-width: 768px) and (max-width: 992px) {
+                .eael-twitter-feed-85399e7.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item,
+                .eael-twitter-feed-85399e7.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+                    width: calc(50% - 5px);
+                }
+            }
+        </style>		</div>
+				</div>
+				<div class="elementor-element elementor-element-5bab1e2 elementor-widget elementor-widget-eael-twitter-feed" data-id="5bab1e2" data-element_type="widget" data-widget_type="eael-twitter-feed.default">
+				<div class="elementor-widget-container">
+			<div class="eael-twitter-feed eael-twitter-feed-5bab1e2 eael-twitter-feed-list eael-twitter-feed- clearfix" data-gutter="10">
+			<div class="eael-twitter-feed-item ">
+				<div class="eael-twitter-feed-item-inner">
+				    <div class="eael-twitter-feed-item-header clearfix"><a class="eael-twitter-feed-item-meta" href="https://twitter.com/@destlinuxpod" target="_blank"><i class="fab fa-twitter eael-twitter-feed-item-icon"></i><span class="eael-twitter-feed-item-author">Destination Linux Network</span>
+                        </a><span class="eael-twitter-feed-item-date">15 hours ago</span></div>
+
+                    <div class="eael-twitter-feed-item-content" data-read-aloud-multi-block="true"><p data-speechify-sentence="">Check out this cool video from Ryan @dasgeekchannel! <img draggable="false" role="img" class="emoji" alt="😀" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/1f600.svg"><img draggable="false" role="img" class="emoji" alt="🐧" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/1f427.svg">
+
+He takes a look at Chrome OS to see how it has progressed, the #Linux implementation expanding the capabilities of a Chromebook, and where does this device fit in?
+
+#DestinationLinux
+@digitalocean
+
+ https://t.co/OmYU8TyvzK</p><a href="https://twitter.com/DestLinuxPod/status/1419675520191516680" target="_blank" class="read-more-link" data-speechify-sentence="">Read More <i class="fas fa-angle-double-right"></i></a></div>
+                    <img src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/E7OzQv8UUAALEM5.jpg">
+                </div>
+			</div>
+        </div><style>
+            .eael-twitter-feed-5bab1e2.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
+                width: calc(50% - 5px);
+            }
+            .eael-twitter-feed-5bab1e2.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item {
+                width: calc(33.33% - 7px);
+            }
+            .eael-twitter-feed-5bab1e2.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+                width: calc(25% - 8px);
+            }
+
+            .eael-twitter-feed-5bab1e2.eael-twitter-feed-col-2 .eael-twitter-feed-item,
+            .eael-twitter-feed-5bab1e2.eael-twitter-feed-col-3 .eael-twitter-feed-item,
+            .eael-twitter-feed-5bab1e2.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+                margin-bottom: 10px;
+            }
+            @media only screen and (min-width: 768px) and (max-width: 992px) {
+                .eael-twitter-feed-5bab1e2.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item,
+                .eael-twitter-feed-5bab1e2.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+                    width: calc(50% - 5px);
+                }
+            }
+        </style>		</div>
+				</div>
+				<div class="elementor-element elementor-element-25154a6 elementor-widget elementor-widget-global elementor-global-1664 elementor-widget-html" data-id="25154a6" data-element_type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+			<script async="" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/f.txt"></script>
+<!-- FPL - Sidebar - 2 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7485309580047004" data-ad-slot="4054651387" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				</div>
+		</div>
+				<div data-elementor-type="footer" data-elementor-id="975" class="elementor elementor-975 elementor-location-footer" data-elementor-settings="[]">
+		<div class="elementor-section-wrap">
+					<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-0b36b4f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="0b36b4f" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-9a0c1d0" data-id="9a0c1d0" data-element_type="column">
+			<div class="elementor-column-wrap">
+							<div class="elementor-widget-wrap">
+								</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-31b83ad8 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="31b83ad8" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-19f2c133" data-id="19f2c133" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-21b71ba3 elementor-widget elementor-widget-theme-site-logo elementor-widget-image" data-id="21b71ba3" data-element_type="widget" data-widget_type="theme-site-logo.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="https://frontpagelinux.com/">
+							<img width="400" height="54" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/fpl-blocks-logo.png" class="attachment-full size-full" alt="" loading="lazy" srcset="https://frontpagelinux.com/wp-content/uploads/fpl-blocks-logo.png 400w, https://frontpagelinux.com/wp-content/uploads/fpl-blocks-logo-300x41.png 300w" sizes="(max-width: 400px) 100vw, 400px">								</a>
+														</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-1e7e2600 elementor-widget elementor-widget-text-editor" data-id="1e7e2600" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+					<p>Front Page Linux is a proud member of the Destination Linux Network.</p>					</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-4d7ad6fa e-grid-align-left e-grid-align-mobile-left elementor-shape-rounded elementor-grid-0 elementor-widget elementor-widget-social-icons" data-id="4d7ad6fa" data-element_type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-social-icons-wrapper elementor-grid">
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-twitter elementor-repeater-item-dc10550" href="https://twitter.com/frontpagelinux" target="_blank">
+						<span class="elementor-screen-only">Twitter</span>
+						<i class="fab fa-twitter"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-youtube elementor-repeater-item-dbaeb71" href="https://www.youtube.com/channel/UCWJUSpXVHTaHErtGWC5qPlQ" target="_blank">
+						<span class="elementor-screen-only">Youtube</span>
+						<i class="fab fa-youtube"></i>					</a>
+				</span>
+					</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-2b5549" data-id="2b5549" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-1bc35a70 elementor-widget elementor-widget-heading" data-id="1bc35a70" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Categories</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-3e9d2145 elementor-align-left elementor-mobile-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="3e9d2145" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+					<a href="https://frontpagelinux.com/category/news/">					<span class="elementor-icon-list-text">News</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://frontpagelinux.com/category/articles/">					<span class="elementor-icon-list-text">Articles</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://frontpagelinux.com/category/tutorials/">					<span class="elementor-icon-list-text">Tutorials</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://frontpagelinux.com/category/videos/">					<span class="elementor-icon-list-text">Videos</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Browse by Tags</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-75799cdc" data-id="75799cdc" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-46cde6a0 elementor-widget elementor-widget-heading" data-id="46cde6a0" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Quick Links</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-2500e979 elementor-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="2500e979" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+					<a href="https://frontpagelinux.com/about">					<span class="elementor-icon-list-text">About FPL</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://discourse.destinationlinux.network/">					<span class="elementor-icon-list-text">Forum</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://frontpagelinux.com/about/">					<span class="elementor-icon-list-text">Contribute to FPL</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="https://frontpagelinux.com/feed">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">RSS Feed</span>
+											</a>
+									</li>
+						</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-4a099111" data-id="4a099111" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-17d253d0 elementor-widget elementor-widget-heading" data-id="17d253d0" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="https://frontpagelinux.com/contact/">Get In Touch</a></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-45a9485a elementor-align-left elementor-mobile-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="45a9485a" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+					<a href="https://frontpagelinux.com/contact">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Contact Page</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+					<a href="mailto:mail@destinationlinux.network">					<span class="elementor-icon-list-text">mail@destinationlinux.network</span>
+											</a>
+									</li>
+						</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<footer data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-3fff4436 elementor-section-height-min-height elementor-section-content-middle elementor-section-full_width elementor-section-height-default elementor-section-items-middle" data-id="3fff4436" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-5851093e" data-id="5851093e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-53545e21 elementor-widget elementor-widget-heading" data-id="53545e21" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default"><a href="https://destinationlinux.network/" target="_blank">© Destination Linux Network</a></p>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-465f7fce" data-id="465f7fce" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-4f2cf779 elementor-widget elementor-widget-heading" data-id="4f2cf779" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default"><a href="https://visuex.com/" target="_blank">site by Visuex.com</a></p>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</footer>
+				</div>
+		</div>
+		
+<!-- Matomo --><script type="text/javascript">var _paq = window._paq || [];
+_paq.push(['trackPageView']);_paq.push(['enableLinkTracking']);_paq.push(['alwaysUseSendBeacon']);_paq.push(['setTrackerUrl', "\/\/frontpagelinux.com\/wp-content\/plugins\/matomo\/app\/matomo.php"]);_paq.push(['setSiteId', '1']);var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+g.type='text/javascript'; g.async=true; g.src="\/\/frontpagelinux.com\/wp-content\/uploads\/matomo\/matomo.js"; s.parentNode.insertBefore(g,s);</script><!-- End Matomo Code --><link rel="stylesheet" id="font-awesome-5-all-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/all.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-4-shim-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/v4-shims.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="e-animations-css" href="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/animations.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/dynamic-conditions-public.js.download" id="dynamic-conditions-js"></script>
+<script type="text/javascript" id="load_comments_js-js-extra">
+/* <![CDATA[ */
+var wpdc = {"commentsURL":"https:\/\/frontpagelinux.com\/wp-json\/wp-discourse\/v1\/discourse-comments"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/load-comments.js.download" id="load_comments_js-js"></script>
+<script type="text/javascript" id="5e0943cb8-js-extra">
+/* <![CDATA[ */
+var localize = {"ajaxurl":"https:\/\/frontpagelinux.com\/wp-admin\/admin-ajax.php","nonce":"41dbb866a4","i18n":{"added":"Added ","compare":"Compare","loading":"Loading..."},"ParticleThemesData":{"default":"{\"particles\":{\"number\":{\"value\":160,\"density\":{\"enable\":true,\"value_area\":800}},\"color\":{\"value\":\"#ffffff\"},\"shape\":{\"type\":\"circle\",\"stroke\":{\"width\":0,\"color\":\"#000000\"},\"polygon\":{\"nb_sides\":5},\"image\":{\"src\":\"img\/github.svg\",\"width\":100,\"height\":100}},\"opacity\":{\"value\":0.5,\"random\":false,\"anim\":{\"enable\":false,\"speed\":1,\"opacity_min\":0.1,\"sync\":false}},\"size\":{\"value\":3,\"random\":true,\"anim\":{\"enable\":false,\"speed\":40,\"size_min\":0.1,\"sync\":false}},\"line_linked\":{\"enable\":true,\"distance\":150,\"color\":\"#ffffff\",\"opacity\":0.4,\"width\":1},\"move\":{\"enable\":true,\"speed\":6,\"direction\":\"none\",\"random\":false,\"straight\":false,\"out_mode\":\"out\",\"bounce\":false,\"attract\":{\"enable\":false,\"rotateX\":600,\"rotateY\":1200}}},\"interactivity\":{\"detect_on\":\"canvas\",\"events\":{\"onhover\":{\"enable\":true,\"mode\":\"repulse\"},\"onclick\":{\"enable\":true,\"mode\":\"push\"},\"resize\":true},\"modes\":{\"grab\":{\"distance\":400,\"line_linked\":{\"opacity\":1}},\"bubble\":{\"distance\":400,\"size\":40,\"duration\":2,\"opacity\":8,\"speed\":3},\"repulse\":{\"distance\":200,\"duration\":0.4},\"push\":{\"particles_nb\":4},\"remove\":{\"particles_nb\":2}}},\"retina_detect\":true}","nasa":"{\"particles\":{\"number\":{\"value\":250,\"density\":{\"enable\":true,\"value_area\":800}},\"color\":{\"value\":\"#ffffff\"},\"shape\":{\"type\":\"circle\",\"stroke\":{\"width\":0,\"color\":\"#000000\"},\"polygon\":{\"nb_sides\":5},\"image\":{\"src\":\"img\/github.svg\",\"width\":100,\"height\":100}},\"opacity\":{\"value\":1,\"random\":true,\"anim\":{\"enable\":true,\"speed\":1,\"opacity_min\":0,\"sync\":false}},\"size\":{\"value\":3,\"random\":true,\"anim\":{\"enable\":false,\"speed\":4,\"size_min\":0.3,\"sync\":false}},\"line_linked\":{\"enable\":false,\"distance\":150,\"color\":\"#ffffff\",\"opacity\":0.4,\"width\":1},\"move\":{\"enable\":true,\"speed\":1,\"direction\":\"none\",\"random\":true,\"straight\":false,\"out_mode\":\"out\",\"bounce\":false,\"attract\":{\"enable\":false,\"rotateX\":600,\"rotateY\":600}}},\"interactivity\":{\"detect_on\":\"canvas\",\"events\":{\"onhover\":{\"enable\":true,\"mode\":\"bubble\"},\"onclick\":{\"enable\":true,\"mode\":\"repulse\"},\"resize\":true},\"modes\":{\"grab\":{\"distance\":400,\"line_linked\":{\"opacity\":1}},\"bubble\":{\"distance\":250,\"size\":0,\"duration\":2,\"opacity\":0,\"speed\":3},\"repulse\":{\"distance\":400,\"duration\":0.4},\"push\":{\"particles_nb\":4},\"remove\":{\"particles_nb\":2}}},\"retina_detect\":true}","bubble":"{\"particles\":{\"number\":{\"value\":15,\"density\":{\"enable\":true,\"value_area\":800}},\"color\":{\"value\":\"#1b1e34\"},\"shape\":{\"type\":\"polygon\",\"stroke\":{\"width\":0,\"color\":\"#000\"},\"polygon\":{\"nb_sides\":6},\"image\":{\"src\":\"img\/github.svg\",\"width\":100,\"height\":100}},\"opacity\":{\"value\":0.3,\"random\":true,\"anim\":{\"enable\":false,\"speed\":1,\"opacity_min\":0.1,\"sync\":false}},\"size\":{\"value\":50,\"random\":false,\"anim\":{\"enable\":true,\"speed\":10,\"size_min\":40,\"sync\":false}},\"line_linked\":{\"enable\":false,\"distance\":200,\"color\":\"#ffffff\",\"opacity\":1,\"width\":2},\"move\":{\"enable\":true,\"speed\":8,\"direction\":\"none\",\"random\":false,\"straight\":false,\"out_mode\":\"out\",\"bounce\":false,\"attract\":{\"enable\":false,\"rotateX\":600,\"rotateY\":1200}}},\"interactivity\":{\"detect_on\":\"canvas\",\"events\":{\"onhover\":{\"enable\":false,\"mode\":\"grab\"},\"onclick\":{\"enable\":false,\"mode\":\"push\"},\"resize\":true},\"modes\":{\"grab\":{\"distance\":400,\"line_linked\":{\"opacity\":1}},\"bubble\":{\"distance\":400,\"size\":40,\"duration\":2,\"opacity\":8,\"speed\":3},\"repulse\":{\"distance\":200,\"duration\":0.4},\"push\":{\"particles_nb\":4},\"remove\":{\"particles_nb\":2}}},\"retina_detect\":true}","snow":"{\"particles\":{\"number\":{\"value\":450,\"density\":{\"enable\":true,\"value_area\":800}},\"color\":{\"value\":\"#fff\"},\"shape\":{\"type\":\"circle\",\"stroke\":{\"width\":0,\"color\":\"#000000\"},\"polygon\":{\"nb_sides\":5},\"image\":{\"src\":\"img\/github.svg\",\"width\":100,\"height\":100}},\"opacity\":{\"value\":0.5,\"random\":true,\"anim\":{\"enable\":false,\"speed\":1,\"opacity_min\":0.1,\"sync\":false}},\"size\":{\"value\":5,\"random\":true,\"anim\":{\"enable\":false,\"speed\":40,\"size_min\":0.1,\"sync\":false}},\"line_linked\":{\"enable\":false,\"distance\":500,\"color\":\"#ffffff\",\"opacity\":0.4,\"width\":2},\"move\":{\"enable\":true,\"speed\":6,\"direction\":\"bottom\",\"random\":false,\"straight\":false,\"out_mode\":\"out\",\"bounce\":false,\"attract\":{\"enable\":false,\"rotateX\":600,\"rotateY\":1200}}},\"interactivity\":{\"detect_on\":\"canvas\",\"events\":{\"onhover\":{\"enable\":true,\"mode\":\"bubble\"},\"onclick\":{\"enable\":true,\"mode\":\"repulse\"},\"resize\":true},\"modes\":{\"grab\":{\"distance\":400,\"line_linked\":{\"opacity\":0.5}},\"bubble\":{\"distance\":400,\"size\":4,\"duration\":0.3,\"opacity\":1,\"speed\":3},\"repulse\":{\"distance\":200,\"duration\":0.4},\"push\":{\"particles_nb\":4},\"remove\":{\"particles_nb\":2}}},\"retina_detect\":true}","nyan_cat":"{\"particles\":{\"number\":{\"value\":150,\"density\":{\"enable\":false,\"value_area\":800}},\"color\":{\"value\":\"#ffffff\"},\"shape\":{\"type\":\"star\",\"stroke\":{\"width\":0,\"color\":\"#000000\"},\"polygon\":{\"nb_sides\":5},\"image\":{\"src\":\"http:\/\/wiki.lexisnexis.com\/academic\/images\/f\/fb\/Itunes_podcast_icon_300.jpg\",\"width\":100,\"height\":100}},\"opacity\":{\"value\":0.5,\"random\":false,\"anim\":{\"enable\":false,\"speed\":1,\"opacity_min\":0.1,\"sync\":false}},\"size\":{\"value\":4,\"random\":true,\"anim\":{\"enable\":false,\"speed\":40,\"size_min\":0.1,\"sync\":false}},\"line_linked\":{\"enable\":false,\"distance\":150,\"color\":\"#ffffff\",\"opacity\":0.4,\"width\":1},\"move\":{\"enable\":true,\"speed\":14,\"direction\":\"left\",\"random\":false,\"straight\":true,\"out_mode\":\"out\",\"bounce\":false,\"attract\":{\"enable\":false,\"rotateX\":600,\"rotateY\":1200}}},\"interactivity\":{\"detect_on\":\"canvas\",\"events\":{\"onhover\":{\"enable\":false,\"mode\":\"grab\"},\"onclick\":{\"enable\":true,\"mode\":\"repulse\"},\"resize\":true},\"modes\":{\"grab\":{\"distance\":200,\"line_linked\":{\"opacity\":1}},\"bubble\":{\"distance\":400,\"size\":40,\"duration\":2,\"opacity\":8,\"speed\":3},\"repulse\":{\"distance\":200,\"duration\":0.4},\"push\":{\"particles_nb\":4},\"remove\":{\"particles_nb\":2}}},\"retina_detect\":true}"},"eael_translate_text":{"required_text":"is a required field","invalid_text":"Invalid","billing_text":"Billing"},"eael_login_nonce":"b18f0a9a34","eael_register_nonce":"8c969c7b43"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/5e0943cb8.min.js.download" id="5e0943cb8-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/wp-embed.min.js.download" id="wp-embed-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/jquery.smartmenus.min.js.download" id="smartmenus-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/v4-shims.min.js.download" id="font-awesome-4-shim-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/webpack-pro.runtime.min.js.download" id="elementor-pro-webpack-runtime-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/webpack.runtime.min.js.download" id="elementor-webpack-runtime-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/frontend-modules.min.js.download" id="elementor-frontend-modules-js"></script>
+<script type="text/javascript" id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/frontpagelinux.com\/wp-admin\/admin-ajax.php","nonce":"3bc59f5836","urls":{"assets":"https:\/\/frontpagelinux.com\/wp-content\/plugins\/elementor-pro\/assets\/"},"i18n":{"toc_no_headings_found":"No headings were found on this page."},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"google":{"title":"Google+","has_counter":true},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/frontpagelinux.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/frontend.min.js.download" id="elementor-pro-frontend-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/waypoints.min.js.download" id="elementor-waypoints-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/core.min.js.download" id="jquery-ui-core-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/swiper.min.js.download" id="swiper-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/share-link.min.js.download" id="share-link-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/dialog.min.js.download" id="elementor-dialog-js"></script>
+<script type="text/javascript" id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile","value":767,"direction":"max","is_enabled":true,"default_value":767},"mobile_extra":{"label":"Mobile Extra","value":880,"direction":"max","is_enabled":false,"default_value":880},"tablet":{"label":"Tablet","value":1024,"direction":"max","is_enabled":true,"default_value":1024},"tablet_extra":{"label":"Tablet Extra","value":1365,"direction":"max","is_enabled":false,"default_value":1365},"laptop":{"label":"Laptop","value":1620,"direction":"max","is_enabled":false,"default_value":1620},"widescreen":{"label":"Widescreen","value":2400,"direction":"min","is_enabled":false,"default_value":2400}}},"version":"3.3.1","is_static":false,"experimentalFeatures":{"e_import_export":true,"landing-pages":true,"elements-color-picker":true,"admin-top-bar":true,"form-submissions":true,"video-playlist":true},"urls":{"assets":"https:\/\/frontpagelinux.com\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":8507,"title":"How%20To%20Install%20Arch%20Linux%3A%20A%20Step%20by%20Step%20Installation%20Guide%20-%20Front%20Page%20Linux","excerpt":"","featuredImage":"https:\/\/frontpagelinux.com\/wp-content\/uploads\/2021\/03\/arch-linux-install-guide-frontpagelinux-768x432.jpg"}};
+</script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/frontend.min.js(1).download" id="elementor-frontend-js"></script><span id="elementor-device-mode" class="elementor-screen-only"></span>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/preloaded-elements-handlers.min.js.download" id="pro-preloaded-elements-handlers-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/preloaded-modules.min.js.download" id="preloaded-modules-js"></script>
+<script type="text/javascript" src="./How To Install Arch Linux_ A Step by Step Installation Guide - Front Page Linux_files/jquery.sticky.min.js.download" id="e-sticky-js"></script>
+        <script type="text/javascript">
+            /* <![CDATA[ */
+           document.querySelectorAll("ul.nav-menu").forEach(
+               ulist => { 
+                    if (ulist.querySelectorAll("li").length == 0) {
+                        ulist.style.display = "none";
+
+                                            } 
+                }
+           );
+            /* ]]> */
+        </script>
+        
+
+
+<div id="speechify-selection-button-container">
+    <button class="always-inactive speechify-button plyr__control" data-loading="false" data-plyr="play">
+      
+<svg class="outline-play-icon" width="8" height="10" viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7.125 4.67029C7.29167 4.76651 7.29167 5.00707 7.125 5.1033L1.29481 8.46936C1.12814 8.56559 0.919811 8.4453 0.919811 8.25285L0.919811 1.52073C0.919811 1.32828 1.12814 1.208 1.29481 1.30422L7.125 4.67029Z" fill="white" stroke="#4856fd" stroke-width="1.5"></path>
+</svg>
+
+      
+<svg class="icon--not-pressed" role="presentation" xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" viewBox="0 0 26 26">
+  <path fill="#FFF" fill-rule="evenodd" d="M18.594 14.789l-10.7 5.35c-.988.493-2.189.093-2.683-.895C5.072 18.966 5 18.66 5 18.35V7.65c0-1.104.895-2 2-2 .31 0 .617.072.894.211l10.7 5.35c.988.494 1.388 1.695.894 2.683-.193.387-.507.701-.894.895z"></path>
+</svg>
+
+    </button>
+  </div><div id="speechify-paragraph-hover-button-container"></div></body></html>
