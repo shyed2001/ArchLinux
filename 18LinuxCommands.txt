@@ -1,0 +1,40 @@
+18 Commands That Will Change The Way You Use Linux Forever
+
+1. `cd -` : back to the last directory we've been to.
+2. `ctrl+l`: clear screen
+3. `reset`: clear on steroids - resets terminal session
+4. `pushd /var` + few other `cd` commands + `popd`: commands that allow you to work with directory stack and change the current working directory
+5. `vim /etc/ssh/sshd_config` + ctrl+fz : isn't closing, but minimizing the window to the back ground
+`fg` : bring back the window to the front.
+6. `apt update`: would fail - cuz we fogot sudo
+ `sudo !!` : would run the last command as sudo
+7.
+8. run command that already been run - `history`, choose a number of command
+and run it `!102` -> the 102 command from the history would run again
+
+9.HISTTIMEFORMAT="%Y-%m-%d %T"
+`history` would should the history commands by the format.
+another way to add the format, is add it to the `~/.bashrc` file with `vim` or `nano` commands.
+
+10.cmatrix -> let you look cool + ctrl c to escape
+
+11.adjust font `shift +` or `shift -`, `reset` command would reset the font size
+
+12. `ctrl a` - start of the line
+`ctrl e` - end of the line
+
+13.chainning commands -> `ls -l; echo "hello" `
+or -> `ls -l && echo "hello" `
+&& - would stop when meets an error
+; - would pop up an error and keep on running the second/next command
+
+14. `tail` / `head` commands to see top or bottom of a file.
+
+15. truncate (be cautious while using this one - its risky)
+it allows to change the size of a very large files (like log files)
+for example `truncate -s <size_of_file> <name_of_file>` == truncate -s 0 hello.txt to empty the hello.txt file
+
+
+16. `mount | column -t` : make sure all the output shows in columns 
+any verbose and messy command output would look better using `| column -t`
+
